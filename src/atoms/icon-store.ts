@@ -6,11 +6,12 @@ import {
   DeleteOutlined,
   DescriptionOutlined,
   DesktopWindowsOutlined,
+  EmailOutlined,
   HelpOutlineOutlined,
   KeyboardDoubleArrowRightOutlined,
   LiveHelpOutlined,
   LocalLibraryOutlined,
-  EmailOutlined,
+  SearchOutlined,
   NotificationsNoneOutlined,
   Person2Outlined,
   SettingsOutlined,
@@ -19,7 +20,6 @@ import {
   VisibilityOffOutlined,
   WorkOutlineOutlined,
 } from '@mui/icons-material';
-
 export enum IconType {
   Add = 'add',
   Article = 'article',
@@ -33,6 +33,7 @@ export enum IconType {
   Help = 'help',
   Library = 'library',
   Live = 'live',
+  Search = 'search',
   Notifications = 'notifications',
   Time = 'time',
   Person = 'person',
@@ -42,7 +43,6 @@ export enum IconType {
   VisibilityOff = 'visibilityoff',
   Work = 'work',
 }
-
 export const iconLookup: Record<IconType, typeof AddOutlined> = {
   add: AddOutlined,
   article: ArticleOutlined,
@@ -56,6 +56,7 @@ export const iconLookup: Record<IconType, typeof AddOutlined> = {
   help: HelpOutlineOutlined,
   library: LocalLibraryOutlined,
   live: LiveHelpOutlined,
+  search: SearchOutlined,
   notifications: NotificationsNoneOutlined,
   time: AccessTimeOutlined,
   person: Person2Outlined,
