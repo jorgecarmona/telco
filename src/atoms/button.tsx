@@ -1,10 +1,8 @@
 import React from 'react';
-
 import {
   Button as MuiButton,
   ButtonProps as MuiButtonProps,
 } from '@mui/material';
-
 import {IconType, iconLookup} from './icon-store';
 
 export enum ButtonType {
@@ -13,6 +11,7 @@ export enum ButtonType {
   Outlined = 'outlined',
   Text = 'text',
   Tertiary = 'tertiary',
+  Profile = 'profile',
 }
 
 export interface ButtonProps extends Omit<MuiButtonProps, 'color' | 'variant'> {
@@ -21,7 +20,7 @@ export interface ButtonProps extends Omit<MuiButtonProps, 'color' | 'variant'> {
   disabled?: boolean;
   fullWidth?: boolean;
   icon?: IconType;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
   selected?: boolean;
 }
 
@@ -37,32 +36,35 @@ function Button({
   const Icon = icon ? iconLookup[icon] : null;
   let buttonVariant: 'text' | 'outlined' | 'contained';
   let buttonColor: 'primary' | 'secondary' | 'tertiary' | undefined = undefined;
-
   switch (buttonType) {
     case ButtonType.Primary:
     case ButtonType.Secondary:
       buttonVariant = 'contained';
       buttonColor = buttonType;
       break;
-
     case ButtonType.Outlined:
       buttonVariant = buttonType;
+      break;
+
+    case ButtonType.Profile:
+      buttonVariant = 'text';
       break;
 
     default:
       buttonVariant = 'text';
   }
-
   let className = '';
-
   if (buttonType === ButtonType.Tertiary) {
     className += 'tertiary';
+  }
+
+  if (buttonType === ButtonType.Profile) {
+    className += 'profile';
   }
 
   if (selected) {
     className += className.length > 0 ? ' selected' : 'selected';
   }
-
   return (
     <MuiButton
       className={className}
@@ -77,5 +79,4 @@ function Button({
     </MuiButton>
   );
 }
-
 export default Button;
