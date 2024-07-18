@@ -1,13 +1,13 @@
-import {render, screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import userEvent from '@testing-library/user-event';
 
-import {Autocomplete} from '../../atoms';
+import { Autocomplete } from '../../atoms';
 
 describe('Autocomplete Component', () => {
   const options = [
-    {label: 'Option 1', value: '1'},
-    {label: 'Option 2', value: '2'},
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
   ];
 
   test('renders correctly with required props', () => {
@@ -19,12 +19,7 @@ describe('Autocomplete Component', () => {
 
   test('displays helper text', () => {
     render(
-      <Autocomplete
-      
-        options={options}
-        value="1"
-        helperText="Helper Text"
-      />,
+      <Autocomplete options={options} value="1" helperText="Helper Text" />,
     );
 
     const helperTextElement = screen.getByText('Helper Text');
@@ -34,7 +29,6 @@ describe('Autocomplete Component', () => {
   test('displays error text when error is true', () => {
     render(
       <Autocomplete
-      
         options={options}
         value="1"
         error={true}
@@ -54,21 +48,13 @@ describe('Autocomplete Component', () => {
     expect(inputElement).toHaveValue('Option 2');
   });
 
-  test.skip('displays required label correctly', () => {
+  test('displays required label correctly', () => {
     render(
-      <Autocomplete
-      
-        options={options}
-        value="1"
-        label="Test Label"
-        required={true}
-      />,
+      <Autocomplete options={options} value="1" label="Test Label" required />,
     );
 
-    const requiredIndicator = screen.getByText('*', {
-      selector: 'span[style*="color: red;"]',
-    });
-    expect(requiredIndicator).toBeInTheDocument();
+    const requiredIndicator = screen.getByText(/test label/i);
+    expect(requiredIndicator).toHaveClass('required-field');
   });
 
   test('renders with no options and no value', () => {

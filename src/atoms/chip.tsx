@@ -1,5 +1,5 @@
 import React from 'react';
-import MuiChip, {ChipProps as MuiChipProps} from '@mui/material/Chip';
+import MuiChip, { ChipProps as MuiChipProps } from '@mui/material/Chip';
 
 export type ChipType =
   | 'pending'
@@ -61,6 +61,7 @@ function Chip({
           label={label}
           onClick={onClick}
           onDelete={deletable ? handleDelete : undefined}
+          deleteIcon={deletable ? <span aria-label="delete" /> : undefined}
           variant={variant}
           {...rest}
         />

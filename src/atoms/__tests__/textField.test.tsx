@@ -1,29 +1,38 @@
-import {render, screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import TextField from '../../atoms/textField';
 
 describe('TextField Component', () => {
   it('renders the label correctly', () => {
-    render(<TextField label="Name" value="" onChangeTextField={() => {console.log('function is called')}} />);
+    render(
+      <TextField
+        label="Name"
+        value=""
+        onChangeTextField={() => {
+          console.log('function is called');
+        }}
+      />,
+    );
 
     const labelElement = screen.getByText(/Name/i);
     expect(labelElement).toBeInTheDocument();
   });
 
-  it.skip('displays the required asterisk when required is true', () => {
+  it('displays the required asterisk when required is true', () => {
     render(
       <TextField
         label="Email"
         required
         value=""
-        onChangeTextField={() => {console.log('function is called')}}
+        onChangeTextField={() => {
+          console.log('function is called');
+        }}
       />,
     );
 
-    const asteriskElement = screen.getByDisplayValue(`"*"`);
-    expect(asteriskElement).toBeInTheDocument();
-    expect(asteriskElement).toHaveStyle({color: 'red'});
+    const requiredIndicator = screen.getByText(/email/i);
+    expect(requiredIndicator).toHaveClass('required-field');
   });
 
   it('renders textfield with icon and helpertext', () => {
@@ -32,7 +41,9 @@ describe('TextField Component', () => {
         label="Email"
         icon={true}
         value=""
-        onChangeTextField={() => {console.log('function is called')}}
+        onChangeTextField={() => {
+          console.log('function is called');
+        }}
       />,
     );
   });
@@ -43,7 +54,9 @@ describe('TextField Component', () => {
         label="Email"
         icon={false}
         value=""
-        onChangeTextField={() => {console.log('function is called')}}
+        onChangeTextField={() => {
+          console.log('function is called');
+        }}
       />,
     );
 
@@ -57,7 +70,9 @@ describe('TextField Component', () => {
         label="Email"
         helperText="This is a helper text"
         value=""
-        onChangeTextField={() => {console.log('function is called')}}
+        onChangeTextField={() => {
+          console.log('function is called');
+        }}
       />,
     );
 
