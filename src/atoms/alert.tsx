@@ -33,7 +33,7 @@ function Alert({severity, onClose, children, ...rest}: AlertProps) {
       default:
         return '';
     }
-  };
+  }
 
   return (
     <MuiAlert
