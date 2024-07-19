@@ -5,6 +5,7 @@ import BreadCrumbs from './breadcrumbs';
 import Button from './button';
 import Card from './card';
 import Chip from './chip';
+import Dialog from './dialog';
 import Grid from './grid';
 import Icon from './icon';
 import Link from './link';
@@ -20,6 +21,7 @@ export {
   Button,
   Card,
   Chip,
+  Dialog,
   Grid,
   Icon,
   Link,
