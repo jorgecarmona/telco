@@ -1,14 +1,13 @@
 import {configureStore} from '@reduxjs/toolkit';
 
-import { postsApi } from './api-slice/posts-api';
+import { loansApi } from './api-slice/loans-api';
 
 export const store = configureStore({
   reducer: {
-    // add API slice reducers
-    [postsApi.reducerPath]: postsApi.reducer,
+    [loansApi.reducerPath]: loansApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(postsApi.middleware)
+    getDefaultMiddleware().concat(loansApi.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;
