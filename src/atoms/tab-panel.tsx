@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { IconType, iconLookup } from '../atoms/icon-store';
 
-interface TabConfig {
+export interface TabConfig {
   label: string;
   value: number;
   component: React.ReactNode;
@@ -22,7 +22,7 @@ interface TabPanelProps {
 
 function TabPanel({ tabs, orientation = 'horizontal' }: TabPanelProps) {
   const [value, setValue] = React.useState<number>(tabs[1]?.value || 0);
-
+// que el tab que se abre por default pueda ser especificado por el usuario
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
 
@@ -37,6 +37,7 @@ function TabPanel({ tabs, orientation = 'horizontal' }: TabPanelProps) {
         onChange={handleChange}
         value={value}
         variant={tabs.length > 2 ? 'scrollable' : 'standard'}
+        // el scrollable deberia ser dinamico
         scrollButtons="auto"
         orientation={orientation}
         sx={{ borderRight: orientation === 'vertical' ? 1 : 0, borderBottom: orientation === 'horizontal' ? 1 : 0 }}
@@ -65,3 +66,5 @@ function TabPanel({ tabs, orientation = 'horizontal' }: TabPanelProps) {
 }
 
 export default TabPanel;
+
+// especificar el tab de altura / tratar de cargar lazy desde el api
