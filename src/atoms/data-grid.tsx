@@ -1,4 +1,3 @@
-// components/DataGrid.tsx
 import React, { useState } from 'react';
 import { DataGrid as MuiDataGrid, GridColDef } from '@mui/x-data-grid';
 import { LoanData } from '../store/api-slice/loans-api';
