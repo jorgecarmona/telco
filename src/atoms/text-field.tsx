@@ -14,7 +14,9 @@ interface TextFieldProps {
   fullWidth?: boolean;
   helperText?: string;
   icon?: boolean;
+  id: string;
   label: string;
+  name: string;
   onChangeTextField: (value: string) => void;
   placeholder?: string;
   readOnly?: boolean;
@@ -27,7 +29,9 @@ function TextField({
   fullWidth,
   helperText,
   icon,
+  id,
   label,
+  name,
   onChangeTextField,
   placeholder,
   readOnly,
@@ -56,16 +60,17 @@ function TextField({
         {label}
       </InputLabel>
       <MuiTextField
+        error={error}
         fullWidth={fullWidth}
-        id="TextField"
-        size="small"
-        value={value}
+        helperText={helperText}
+        id={id}
+        name={name}
         onChange={handleChange}
         placeholder={placeholder}
-        error={error}
-        helperText={helperText}
-        style={{backgroundColor: readOnly ? '#eeeeee' : 'transparent'}}
         disabled={readOnly}
+        style={{backgroundColor: readOnly ? '#eeeeee' : 'transparent'}}
+        value={value}
+        size="small"
         InputProps={{
           startAdornment: renderEmailIcon(),
         }}
