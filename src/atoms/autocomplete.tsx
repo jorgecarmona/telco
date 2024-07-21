@@ -12,6 +12,8 @@ interface OptionType {
   value: string;
 }
 interface AutocompleteProps {
+  id: string;
+  name: string;
   error?: boolean;
   errorHelperText?: string;
   helperText?: string;
@@ -21,6 +23,8 @@ interface AutocompleteProps {
   value: string;
 }
 function Autocomplete({
+  id,
+  name,
   error,
   errorHelperText,
   helperText,
@@ -55,6 +59,8 @@ function Autocomplete({
           <div style={{width: '300px'}}>
             <TextField
               {...params}
+              id={id}
+              name={name}
               helperText={newHelperText}
               error={Boolean(error)}
               variant="outlined"

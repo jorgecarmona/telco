@@ -12,11 +12,15 @@ export default {
   args: {
     label: '',
     value: '',
-    error: true,
+    error: false,
     errorHelperText: '',
     helperText: '',
-    required: true,
+    required: false,
   },
+  argTypes: {
+    id: {control: { disable: true}},
+    name: {control: { disable: true}}
+  }
 } as Meta<typeof Autocomplete>;
 
 export const Default: Story = {
