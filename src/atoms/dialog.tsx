@@ -1,22 +1,31 @@
 import React from 'react';
-
-import {Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle, Button} from '@mui/material';
+import {  Button, Dialog as MuiDialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 
 interface DialogProps {
   type: 'alert' | 'form' | 'size';
   label: string;
   title: string;
-  buttonType?: "button" | "submit" | "reset";
+  buttonType?: 'button' ;
   open: boolean;
   onClose: () => void;
   content: React.ReactNode;
-  actions?: React.ReactNode; 
-  size?: 'sm' | 'md' | 'lg';
+  actions?: React.ReactNode;
+  size: 'sm' | 'md' | 'lg';
 }
 
-function MuiDialog ({type,label,title,buttonType = 'button',open,onClose,content,actions,size='md'}: DialogProps) {
+function Dialog ({ 
+  type, 
+  label, 
+  title, 
+  buttonType = 'button', 
+  open, 
+  onClose, 
+  content, 
+  actions, 
+  size = 'lg'
+}: DialogProps) {
   return (
-    <Dialog
+    <MuiDialog
       open={open}
       onClose={onClose}
       aria-labelledby="dialog-title"
@@ -27,30 +36,14 @@ function MuiDialog ({type,label,title,buttonType = 'button',open,onClose,content
       <DialogContent>
         <DialogContentText id="dialog-content">{content}</DialogContentText>
       </DialogContent>
-      {type === 'form' && (
-        <DialogActions>
-          {actions && actions}
-          <Button onClick={onClose} type={buttonType} color="primary">
-            {label}
-          </Button>
-        </DialogActions>
-      )}
-      {type === 'alert' && (
-        <DialogActions>
-          <Button onClick={onClose} color="primary">
-            {label}
-          </Button>
-        </DialogActions>
-      )}
-        {type === 'size' && (
-        <DialogActions>
-          <Button onClick={onClose} color="primary">
-            {label}
-          </Button>
-        </DialogActions>
-      )}
-    </Dialog>
+      <DialogActions>
+        {type === 'form' && actions}
+        <Button onClick={onClose} type={type === 'form' ? buttonType : 'button'} color="primary">
+          {label}
+        </Button>
+      </DialogActions>
+    </MuiDialog>
   );
 }
 
-export default MuiDialog;
+export default Dialog;
