@@ -10,10 +10,10 @@ const meta: Meta<typeof TextField> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    id: {control: {disable: true}},
-    name: {control: {disable: true}},
-    inputProps: {control: {disable: true}},
-    type: {control: {disable: true}},
+    id: {table: {disable: true}},
+    name: {table: {disable: true}},
+    inputProps: {table: {disable: true}},
+    type: {table: {disable: true}},
     onChangeTextField: {
       action: 'changed',
       description: 'Callback function for text field changes',
