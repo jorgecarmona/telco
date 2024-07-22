@@ -36,14 +36,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    helperText: 'Ingresa tu contraseña',
+    icon: false,
     id: 'password',
-    label: 'Password',
     name: 'password',
+    helperText: 'Ingresa tu contraseña',
+    label: 'Password',
+    value: '1234567',
     onChangeCallback: (value) => {
       console.log('Password entered:', value);
     },
-    value: '1234567',
+    required: false,
   },
 };
 
@@ -72,5 +74,6 @@ export const WithIcon: Story = {
       console.log('Password entered:', value);
     },
     value: '1234567',
+    required: false,
   },
 };
