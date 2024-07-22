@@ -9,7 +9,7 @@ import Grid from './grid';
 import Icon from './icon';
 import Link from './link';
 import Password from './password';
-import TextField from './textField';
+import TextField from './text-field';
 import Typography from './typography';
 
 export {

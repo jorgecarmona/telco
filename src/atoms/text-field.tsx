@@ -14,12 +14,16 @@ interface TextFieldProps {
   fullWidth?: boolean;
   helperText?: string;
   icon?: boolean;
-  label: string;
-  onChangeTextField: (value: string) => void;
+  id: string;
+  label?: string;
+  name: string;
+  onChangeTextField: (e: ChangeEvent<HTMLInputElement>) => void
   placeholder?: string;
   readOnly?: boolean;
   required?: boolean;
   value?: string;
+  inputProps?: object;
+  type?: any;
 }
 
 function TextField({
@@ -27,12 +31,16 @@ function TextField({
   fullWidth,
   helperText,
   icon,
+  id,
   label,
+  name,
   onChangeTextField,
   placeholder,
   readOnly,
   required,
   value,
+  inputProps,
+  ...others
 }: TextFieldProps) {
   const renderEmailIcon = () => {
     if (icon) {
@@ -45,7 +53,7 @@ function TextField({
     return null;
   };
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
-    onChangeTextField(e.target.value);
+    onChangeTextField(e);
 
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
@@ -56,19 +64,22 @@ function TextField({
         {label}
       </InputLabel>
       <MuiTextField
+        error={error}
         fullWidth={fullWidth}
-        id="TextField"
-        size="small"
-        value={value}
+        helperText={helperText}
+        id={id}
+        name={name}
         onChange={handleChange}
         placeholder={placeholder}
-        error={error}
-        helperText={helperText}
-        style={{backgroundColor: readOnly ? '#eeeeee' : 'transparent'}}
         disabled={readOnly}
+        style={{backgroundColor: readOnly ? '#eeeeee' : 'transparent'}}
+        value={value}
+        size="small"
         InputProps={{
           startAdornment: renderEmailIcon(),
+          ...inputProps,
         }}
+        {...others}
       />
     </div>
   );
