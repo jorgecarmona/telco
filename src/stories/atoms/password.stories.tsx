@@ -9,18 +9,24 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    id: {control: { disable: true}},
+    name: {control: { disable: true}}
+  },
   args: {
-    label: '',
-    value: '',
-    helperText: '',
-    onChangeCallback: (value: string) => {
-      console.log('passeord entered:', value);
-    },
     error: false,
     errorHelperText: '',
     fullWidth: false,
+    helperText: '',
     icon: true,
+    id: '',
+    label: '',
+    name: '',
+    onChangeCallback: (value: string) => {
+      console.log('passeord entered:', value);
+    },
     required: true,
+    value: '',
   },
 } satisfies Meta<typeof Password>;
 
@@ -30,35 +36,41 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    label: 'Password',
-    value: '1234567',
     helperText: 'Ingresa tu contraseña',
+    id: 'password',
+    label: 'Password',
+    name: 'password',
     onChangeCallback: (value) => {
       console.log('Password entered:', value);
     },
+    value: '1234567',
   },
 };
 
 export const WithError: Story = {
   args: {
-    label: 'Password',
-    value: '1234567',
     error: true,
-    required: true,
     errorHelperText: 'Usuario o contraseña incorrectas',
+    id: 'password',
+    label: 'Password',
+    name: 'password',
     onChangeCallback: (value) => {
       console.log('Password entered:', value);
     },
+    required: true,
+    value: '1234567',
   },
 };
 
 export const WithIcon: Story = {
   args: {
-    label: 'Password',
-    value: '1234567',
     icon: true,
+    id: 'password',
+    label: 'Password',
+    name: 'password',
     onChangeCallback: (value) => {
       console.log('Password entered:', value);
     },
+    value: '1234567',
   },
 };
