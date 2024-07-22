@@ -1,10 +1,11 @@
 import React from 'react';
-import {  Button, Dialog as MuiDialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
+import {  Button, Dialog as MuiDialog, DialogProps as MuiDialogProps, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 
+//estender Propiedades con la interface de MUI 
 interface DialogProps {
   type: 'alert' | 'form' | 'size';
   label: string;
-  title: string;
+  title: React.ReactNode | string;
   buttonType?: 'button' ;
   open: boolean;
   onClose: () => void;
@@ -12,6 +13,7 @@ interface DialogProps {
   actions?: React.ReactNode;
   size: 'sm' | 'md' | 'lg';
 }
+
 
 function Dialog ({ 
   type, 
