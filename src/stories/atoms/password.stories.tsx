@@ -10,8 +10,8 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    id: {control: { disable: true}},
-    name: {control: { disable: true}}
+    id: {table: { disable: true}},
+    name: {table: { disable: true}}
   },
   args: {
     error: false,
