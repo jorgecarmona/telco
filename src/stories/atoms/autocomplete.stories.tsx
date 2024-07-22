@@ -18,8 +18,8 @@ export default {
     required: false,
   },
   argTypes: {
-    id: {control: { disable: true}},
-    name: {control: { disable: true}}
+    id: {table: { disable: true}},
+    name: {table: { disable: true}}
   }
 } as Meta<typeof Autocomplete>;
 
