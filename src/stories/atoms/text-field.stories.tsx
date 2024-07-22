@@ -2,7 +2,7 @@ import {Meta, StoryObj} from '@storybook/react';
 
 import TextField from '../../atoms/text-field';
 
-const meta = {
+const meta: Meta<typeof TextField> = {
   title: 'Atoms/TextField',
   component: TextField,
   parameters: {
@@ -11,7 +11,13 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     id: {control: {disable: true}},
-    name: {control: {disable: true}}
+    name: {control: {disable: true}},
+    inputProps: {control: {disable: true}},
+    type: {control: {disable: true}},
+    onChangeTextField: {
+      action: 'changed',
+      description: 'Callback function for text field changes',
+    },
   },
   args: {
     error: false,
@@ -21,8 +27,8 @@ const meta = {
     icon: false,
     label: '',
     name: '',
-    onChangeTextField: (value: string) => {
-      console.log('TextField entered:', value);
+    onChangeTextField: (e: React.ChangeEvent<HTMLInputElement>) => {
+      console.log('TextField entered:', e.target.value);
     },
     placeholder: '',
     readOnly: false,
@@ -40,8 +46,8 @@ export const Default: Story = {
     label: 'Name',
     value: 'Massachusetts Paid Family & Medical Leave',
     fullWidth: true,
-    onChangeTextField: (value) => {
-      console.log('TextField entered:', value);
+    onChangeTextField: (e) => {
+      console.log('TextField entered:', e.target.value);
     },
     id: "123",
     name: "Text Field",
@@ -53,8 +59,9 @@ export const IconTextField: Story = {
     id: "123",
     label: 'Code',
     name: "Text Field",
-    onChangeTextField: (value: string) => {
-      console.log('TextField entered:', value);
+    icon: true,  // Added icon prop for demonstration
+    onChangeTextField: (e) => {
+      console.log('TextField entered:', e.target.value);
     },
     readOnly: true,
     value: 'PF-ML',
@@ -66,11 +73,11 @@ export const ReadOnlyTextField: Story = {
     id: "123",
     label: 'Code',
     name: "Text Field",
-    onChangeTextField: (value) => {
-      console.log('TextField entered:', value);
-    },
     readOnly: true,
     value: 'PF-ML',
+    onChangeTextField: (e) => {
+      console.log('TextField entered:', e.target.value);
+    },
   },
 };
 
@@ -82,8 +89,8 @@ export const ErrorsTextField: Story = {
     label: 'Name',
     required: true,
     name: "Text Field",
-    onChangeTextField: (value) => {
-      console.log('TextField entered:', value);
+    onChangeTextField: (e) => {
+      console.log('TextField entered:', e.target.value);
     },
     value: '',
   },

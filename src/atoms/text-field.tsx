@@ -15,13 +15,15 @@ interface TextFieldProps {
   helperText?: string;
   icon?: boolean;
   id: string;
-  label: string;
+  label?: string;
   name: string;
-  onChangeTextField: (value: string) => void;
+  onChangeTextField: (e: ChangeEvent<HTMLInputElement>) => void
   placeholder?: string;
   readOnly?: boolean;
   required?: boolean;
   value?: string;
+  inputProps?: object;
+  type?: any;
 }
 
 function TextField({
@@ -37,6 +39,8 @@ function TextField({
   readOnly,
   required,
   value,
+  inputProps,
+  ...others
 }: TextFieldProps) {
   const renderEmailIcon = () => {
     if (icon) {
@@ -49,7 +53,7 @@ function TextField({
     return null;
   };
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
-    onChangeTextField(e.target.value);
+    onChangeTextField(e);
 
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
@@ -73,7 +77,9 @@ function TextField({
         size="small"
         InputProps={{
           startAdornment: renderEmailIcon(),
+          ...inputProps,
         }}
+        {...others}
       />
     </div>
   );
