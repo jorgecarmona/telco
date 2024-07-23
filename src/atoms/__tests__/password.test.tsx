@@ -5,17 +5,28 @@ import Password from '../../atoms/password';
 import userEvent from '@testing-library/user-event';
 
 describe('Password', () => {
+
   it('renders without crashing', () => {
-    render(<Password label="Password" value="" onChangeCallback={() => {console.log('function is called')}} />);
+    render(<Password 
+      id="Password" 
+      label="Password" 
+      name="Password" 
+      onChangeCallback={() => {console.log('function is called')}} 
+      value="" 
+      />
+    );
   });
+
   it('renders type default', () => {
     render(
       <Password
-        label="Password"
-        value=""
-        onChangeCallback={() => {console.log('function is called')}}
-        helperText="ingresa tu contraseña"
         fullWidth
+        helperText="ingresa tu contraseña"
+        id="Password" 
+        label="Password"
+        name="Password"
+        onChangeCallback={() => {console.log('function is called')}}
+        value=""
       />,
     );
     const Label = screen.getByText('Password');
@@ -24,15 +35,18 @@ describe('Password', () => {
     const HelperText = screen.getByText('ingresa tu contraseña');
     expect(HelperText).toBeInTheDocument();
   });
+
   it('renders password with error', () => {
     render(
       <Password
-        label="Password"
-        value=""
-        onChangeCallback={() => {console.log('function is called')}}
-        error
+        error 
         errorHelperText="Usuario o contraseña incorrectas"
         fullWidth
+        id="Password" 
+        label="Password"
+        name="Password"
+        onChangeCallback={() => {console.log('function is called')}}
+        value=""
       />,
     );
     const Label = screen.getByText('Password');
@@ -43,15 +57,18 @@ describe('Password', () => {
     );
     expect(errorHelperText).toBeInTheDocument();
   });
+
   it('renders password with icon', async () => {
     render(
       <Password
-        label="Password"
-        value=""
-        onChangeCallback={() => {console.log('function is called')}}
+        fullWidth
         helperText="ingresa tu contraseña"
         icon={true}
-        fullWidth
+        id="Password" 
+        label="Password"
+        name="Password"
+        onChangeCallback={() => {console.log('function is called')}}
+        value=""
       />,
     );
     const toggleButton = screen.getByLabelText('toggle password visibility');
@@ -60,15 +77,18 @@ describe('Password', () => {
 
     expect(toggleButton).toBeInTheDocument();
   });
+
   it('calls onChangeCallback when user enters password', async () => {
     const handlePasswordMock = jest.fn();
     const newPassword = 'hola';
 
     render(
       <Password
+        id="Password" 
         label="Password"
-        value=""
+        name="Password"
         onChangeCallback={handlePasswordMock}
+        value=""
       />,
     );
 

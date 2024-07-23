@@ -8,11 +8,16 @@ interface NavigationItem {
   label?: string;
   path?: string;
 }
-interface BreadcrumbProps extends MuiBreadcrumbsProps {
+
+export interface BreadcrumbProps extends MuiBreadcrumbsProps {
   separator?: string | JSX.Element;
   items: NavigationItem[];
-  onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+  onClick?: (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    path?: string,
+  ) => void;
 }
+
 function BreadCrumbs({separator = '>', items, onClick}: BreadcrumbProps) {
   if (items.length === 0) {
     return null;
@@ -23,14 +28,14 @@ function BreadCrumbs({separator = '>', items, onClick}: BreadcrumbProps) {
   ) => {
     event.preventDefault();
     if (onClick) {
-      onClick(event);
+      onClick(event, path);
     }
   };
+
   return (
     <MuiBreadcrumbs
       separator={separator}
       data-testid="breadcrumbs-container"
-      onClick={handleClick}
     >
       {items.map((item, index) => {
         const isLast = index === items.length - 1;
@@ -40,6 +45,7 @@ function BreadCrumbs({separator = '>', items, onClick}: BreadcrumbProps) {
             href={isLast ? undefined : item.path ?? '#'}
             underline="hover"
             color="inherit"
+            onClick={(event) => handleClick(event, item.path)}
             style={
               isLast
                 ? {pointerEvents: 'none', cursor: 'default', fontWeight: 'bold'}
@@ -53,4 +59,5 @@ function BreadCrumbs({separator = '>', items, onClick}: BreadcrumbProps) {
     </MuiBreadcrumbs>
   );
 }
+
 export default BreadCrumbs;
