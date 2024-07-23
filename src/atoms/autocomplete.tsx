@@ -66,6 +66,7 @@ function Autocomplete({
           <div style={{width: '300px'}}>
             <TextField
               {...params}
+              label=''
               id={id}
               name={name}
               helperText={newHelperText}
