@@ -3,7 +3,7 @@ import { DataGrid as MuiDataGrid, DataGridProps as MuiDataGridProps, GridColDef 
 
 interface DataGridProps extends Omit<MuiDataGridProps, 'columns' | 'rows'> {
   columns: GridColDef[];
-  rows: any[];
+  rows: Record<string, unknown>[];
 }
 
 function DataGrid({ columns, rows, ...other }: DataGridProps) {
