@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import {
   Autocomplete as MuiAutocomplete,
-  InputLabel,
-  TextField,
+  InputLabel
 } from '@mui/material';
+
+import TextField from './text-field';
 
 import './styles/app.css';
 
@@ -21,6 +22,7 @@ interface AutocompleteProps {
   options: OptionType[];
   required?: boolean;
   value: string;
+  onChangeCallback: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 function Autocomplete({
   id,
@@ -32,12 +34,17 @@ function Autocomplete({
   options,
   required,
   value,
+  onChangeCallback,
 }: AutocompleteProps) {
   const [inputValue, setInputValue] = React.useState(value);
   let newHelperText = helperText;
   if (error) {
     newHelperText = errorHelperText;
   }
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onChangeCallback(e);
+  };
 
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
@@ -64,6 +71,7 @@ function Autocomplete({
               helperText={newHelperText}
               error={Boolean(error)}
               variant="outlined"
+              onChangeTextField={handleChange}
             />
           </div>
         )}

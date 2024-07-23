@@ -19,7 +19,8 @@ export default {
   },
   argTypes: {
     id: {table: { disable: true}},
-    name: {table: { disable: true}}
+    name: {table: { disable: true}},
+    value: {table: { disable: true}}
   }
 } as Meta<typeof Autocomplete>;
 
