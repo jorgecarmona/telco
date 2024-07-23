@@ -13,16 +13,21 @@ export interface TabConfig {
   disabled?: boolean;
   callBack?: () => void;
   iconPosition?: 'top' | 'bottom' | 'end' | 'start';
+  tabHeight?: string | number;
+  tabWidth?: string | number;
 }
 
 interface TabPanelProps {
   tabs: TabConfig[];
   orientation?: 'horizontal' | 'vertical';
+  positionTab: number;
+  scroll: number;
 }
 
-function TabPanel({ tabs, orientation = 'horizontal' }: TabPanelProps) {
-  const [value, setValue] = React.useState<number>(tabs[1]?.value || 0);
-// que el tab que se abre por default pueda ser especificado por el usuario
+function TabPanel({ tabs, orientation = 'horizontal', positionTab, scroll }: TabPanelProps) {
+  // que el tab que se abre por default pueda ser especificado por el usuario
+  const initialTabValue = tabs.find(tab => tab.value === positionTab)?.value || 0;
+  const [value, setValue] = React.useState<number>(initialTabValue);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
 
@@ -36,8 +41,8 @@ function TabPanel({ tabs, orientation = 'horizontal' }: TabPanelProps) {
       <Tabs
         onChange={handleChange}
         value={value}
-        variant={tabs.length > 2 ? 'scrollable' : 'standard'}
         // el scrollable deberia ser dinamico
+        variant={tabs.length > scroll ? 'scrollable' : 'standard'}
         scrollButtons="auto"
         orientation={orientation}
         sx={{ borderRight: orientation === 'vertical' ? 1 : 0, borderBottom: orientation === 'horizontal' ? 1 : 0 }}
@@ -52,6 +57,7 @@ function TabPanel({ tabs, orientation = 'horizontal' }: TabPanelProps) {
               disabled={tab.disabled}
               value={tab.value}
               iconPosition={tab.iconPosition}
+              sx={{ height: tab.tabHeight, width: tab.tabWidth }}
             />
           );
         })}
