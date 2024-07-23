@@ -1,28 +1,33 @@
 import React, {ChangeEvent} from 'react';
 
+import TextField from './text-field';
+
 import {iconLookup} from './icon-store';
-import {IconButton, InputAdornment, TextField, InputLabel} from '@mui/material';
+import {IconButton, InputAdornment, InputLabel} from '@mui/material';
 
 interface PasswordProps {
   error?: boolean;
   errorHelperText?: string;
   fullWidth?: boolean;
-  onChangeCallback: (value: string) => void;
   helperText?: string;
   icon?: boolean;
+  id: string;
   label: string;
+  name: string;
+  onChangeCallback: (value: string) => void;
   required?: boolean;
   value: string;
 }
 
 function Password({
-  fullWidth = false,
-  label,
-  onChangeCallback,
-  helperText,
   error,
   errorHelperText,
+  fullWidth = false,
+  helperText,
   icon,
+  label,
+  name,
+  onChangeCallback,
   required,
   value,
 }: PasswordProps) {
@@ -63,11 +68,7 @@ function Password({
   }
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-      }}
-    >
+    <div>
       <InputLabel htmlFor="Password" required={false}>
         {label} {required && <span style={{color: 'red'}}>*</span>}
       </InputLabel>
@@ -76,16 +77,15 @@ function Password({
         fullWidth={fullWidth}
         helperText={newHelperText}
         id="Password"
-        InputProps={{
-          endAdornment: renderPasswordIcon(),
+        inputProps={{
+          endAdornment: renderPasswordIcon(), 
         }}
-        onChange={handleChange}
-        required={required}
-        size="small"
+        name={name}
+        onChangeTextField={handleChange}
         type={showPassword ? 'text' : 'password'}
         value={value}
       />
-    </form>
+    </div>
   );
 }
 
