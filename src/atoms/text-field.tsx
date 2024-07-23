@@ -1,45 +1,28 @@
-import {ChangeEvent} from 'react';
+import { ChangeEvent } from 'react';
 
-import {
-  TextField as MuiTextField,
-  InputAdornment,
-  InputLabel,
-} from '@mui/material';
-import {iconLookup} from './icon-store';
+import { TextField as MuiTextField, InputAdornment, InputLabel, TextFieldProps as MuiTextFieldProps } from '@mui/material';
+import { iconLookup } from './icon-store';
 
 import './styles/app.css';
 
-interface TextFieldProps {
-  error?: boolean;
-  fullWidth?: boolean;
-  helperText?: string;
+export interface TextFieldProps extends Omit<MuiTextFieldProps, 'onChange' | 'InputProps'> {
   icon?: boolean;
   id: string;
-  label?: string;
-  name: string;
-  onChangeTextField: (e: ChangeEvent<HTMLInputElement>) => void
-  placeholder?: string;
+  label: string;
+  name: string
+  onChangeTextField: (e: ChangeEvent<HTMLInputElement>) => void;
   readOnly?: boolean;
-  required?: boolean;
-  value?: string;
-  inputProps?: object;
-  type?: any;
+  InputProps?: MuiTextFieldProps['InputProps'];
 }
 
 function TextField({
-  error,
-  fullWidth,
-  helperText,
   icon,
   id,
   label,
   name,
   onChangeTextField,
-  placeholder,
   readOnly,
-  required,
-  value,
-  inputProps,
+  InputProps,
   ...others
 }: TextFieldProps) {
   const renderEmailIcon = () => {
@@ -52,33 +35,30 @@ function TextField({
     }
     return null;
   };
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
-    onChangeTextField(e);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => onChangeTextField(e);
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
-      <InputLabel
-        htmlFor="TextField"
-        className={required ? 'required-field' : undefined}
-      >
-        {label}
-      </InputLabel>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      {label && (
+        <InputLabel
+          htmlFor={id}
+          className={others.required ? 'required-field' : undefined}
+        >
+          {label}
+        </InputLabel>
+      )}
       <MuiTextField
-        error={error}
-        fullWidth={fullWidth}
-        helperText={helperText}
+        disabled={readOnly}
         id={id}
         name={name}
         onChange={handleChange}
-        placeholder={placeholder}
-        disabled={readOnly}
-        style={{backgroundColor: readOnly ? '#eeeeee' : 'transparent'}}
-        value={value}
-        size="small"
         InputProps={{
           startAdornment: renderEmailIcon(),
-          ...inputProps,
+          ...InputProps,
         }}
+        style={{ backgroundColor: readOnly ? '#eeeeee' : 'transparent' }}
+        size='small'
         {...others}
       />
     </div>
