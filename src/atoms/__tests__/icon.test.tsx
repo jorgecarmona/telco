@@ -33,13 +33,6 @@ describe('Icon', () => {
     expect(iconElement).toHaveStyle('borderRadius: 50%');
   });
 
-  // it('should render a notification badge if hasNotifications is true', () => {
-  //   render(<Icon name={IconType.Article} hasNotifications={true} />);
-
-  //   const badgeElement = screen.getByRole('status');
-  //   expect(badgeElement).toBeInTheDocument();
-  // });
-
   it('should not render a notification badge if hasNotifications is false', () => {
     render(<Icon name={IconType.Article} hasNotifications={false} />);
 
