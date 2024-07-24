@@ -9,6 +9,7 @@ import Grid from './grid';
 import Icon from './icon';
 import Link from './link';
 import Password from './password';
+import TabPanel from './tab-panel';
 import TextField from './text-field';
 import Typography from './typography';
 
@@ -24,6 +25,7 @@ export {
   Icon,
   Link,
   Password,
+  TabPanel,
   TextField,
   Typography,
 };
