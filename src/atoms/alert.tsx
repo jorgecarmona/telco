@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Alert as MuiAlert, AlertTitle as MuiAlertTitle, AlertProps as MuiAlertProps } from '@mui/material';
 
 interface AlertProps extends MuiAlertProps {
@@ -20,20 +21,15 @@ function Alert({ severity, title, onClose, children, ...rest }: AlertProps) {
 
   if (!open) return null;
 
-
-  const AlertTitle  = (severity: 'error' | 'info' | 'success' | 'warning') => {
-    switch (severity) {
-      case 'error':
-        return 'Error';
-      case 'info':
-        return 'Info';
-      case 'success':
-        return 'Success';
-      case 'warning':
-        return 'Warning';
-      default:
-        return '';
-    }
+  const AlertTitle = (severity: 'error' | 'info' | 'success' | 'warning') => {
+    const titles: Record<'error' | 'info' | 'success' | 'warning', string> = {
+      'error': 'Error',
+      'info': 'Info',
+      'success': 'Success',
+      'warning': 'Warning',
+    };
+  
+    return titles[severity] || '';
   };
 
   return (
@@ -47,7 +43,7 @@ function Alert({ severity, title, onClose, children, ...rest }: AlertProps) {
       }}
       {...rest}
     >
-      <MuiAlertTitle>{title || AlertTitle (severity)}</MuiAlertTitle> 
+      <MuiAlertTitle>{title || AlertTitle(severity)}</MuiAlertTitle> 
       {children}
     </MuiAlert>
   );
