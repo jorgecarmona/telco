@@ -44,4 +44,28 @@ describe('Snackbar Component', () => {
 
         expect(screen.getByText('Non-transient Snackbar')).toBeInTheDocument();
     });
+
+    it('handles close event when reason is not "clickaway"', async () => {
+        const onClose = jest.fn();
+        render(<Snackbar message="Closable Snackbar" open={true} onClose={onClose} transient={true} duration={3000} />);
+        const closeButton = screen.getByText('Close');
+        await userEvent.click(closeButton);
+        expect(onClose).toHaveBeenCalledTimes(1);
+    });
+
+    it('does not call onClose when reason is "clickaway"', () => {
+        const onClose = jest.fn();
+        render(<Snackbar message="Non-clickaway Snackbar" open={true} onClose={onClose} transient={true} duration={3000} />);
+        const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+        Object.defineProperty(event, 'reason', { value: 'clickaway' });
+        screen.getByText('Non-clickaway Snackbar').dispatchEvent(event);
+        expect(onClose).not.toHaveBeenCalled();
+    });
+
+    it('handles close event when onClose is not provided', async () => {
+        render(<Snackbar message="No onClose Snackbar" open={true} transient={true} duration={3000} />);
+        const closeButton = screen.getByText('Close');
+        await userEvent.click(closeButton);
+        expect(screen.getByText('No onClose Snackbar')).toBeInTheDocument();
+    });
 });
