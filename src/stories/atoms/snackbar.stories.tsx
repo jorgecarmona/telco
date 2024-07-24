@@ -11,45 +11,42 @@ const meta = {
     },
     tags: ['autodocs'],
     argTypes: {
-        onClose: { action: 'closed' },
-        severity: {
-            control: {
-                type: 'select',
-                options: ['success', 'info', 'warning', 'error'],
-            },
-            if: {
-                arg: 'type', eq: 'alert',
-            },
-        },
-        type: {
-            control: {
-                type: 'select',
-                options: ['default', 'alert'],
-            },
-        },
-        vertical: {
-            control: {
-                type: 'select',
-                options: ['top', 'bottom'],
-            },
-        },
-        horizontal: {
-            control: {
-                type: 'select',
-                options: ['left', 'center', 'right'],
-            },
-        },
         duration: {
-            control: {
-                type: 'number',
-            },
+            description: 'Set duration',
+            control: 'number',
             if: { arg: 'transient', eq: true },
         },
-        transient: {
-            control: {
-                type: 'boolean',
-            },
+        horizontal: {
+            description: 'Select horizontal position',
+            control: 'select',
+            options: ['left', 'center', 'right'],
         },
+        message: {
+            description: 'Message to display', 
+            control:'text'
+        },
+        severity: {
+            description: 'Select severity',
+            control: 'select',
+            options: ['success', 'info', 'warning', 'error'],
+            if: { arg: 'type', eq: 'alert' },
+        },
+        transient: {
+            description: 'Set transient',
+            control: 'boolean',
+        },
+        type: {
+            description: 'Select type',
+            control: 'select',
+            options: ['default', 'alert'],
+        },
+        vertical: {
+            description: 'Select vertical position',
+            control: 'select',
+            options: ['top', 'bottom'],
+        },
+        open: { table: { disable: true } },
+        onClose: { table: { disable: true } },
     },
 
 } satisfies Meta<typeof Snackbar>;
@@ -82,7 +79,6 @@ export const Default: Story = {
         transient: true,
         vertical: 'bottom',
         horizontal: 'left',
-        open: false
     },
 };
 
@@ -132,7 +128,7 @@ export const WarningAlert: Story = {
         severity: 'warning',
         type: 'alert',
         duration: 6000,
-        transient: false,
+        transient: true,
         vertical: 'top',
         horizontal: 'center'
     },
