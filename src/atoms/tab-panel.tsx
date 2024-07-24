@@ -20,13 +20,12 @@ export interface TabConfig {
 interface TabPanelProps {
   tabs: TabConfig[];
   orientation?: 'horizontal' | 'vertical';
-  positionTab: number;
-  scroll: number;
+  scrollOnTabLength: number;
+  initialTabIndex: number;
 }
 
-function TabPanel({ tabs, orientation = 'horizontal', positionTab, scroll }: TabPanelProps) {
-  // que el tab que se abre por default pueda ser especificado por el usuario
-  const initialTabValue = tabs.find(tab => tab.value === positionTab)?.value || 0;
+function TabPanel({ tabs, orientation = 'horizontal', scrollOnTabLength, initialTabIndex }: TabPanelProps) {
+  const initialTabValue = tabs.find(tab => tab.value === initialTabIndex)?.value || 0;
   const [value, setValue] = React.useState<number>(initialTabValue);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -37,12 +36,11 @@ function TabPanel({ tabs, orientation = 'horizontal', positionTab, scroll }: Tab
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: orientation === 'vertical' ? 'row' : 'column' , width:'300px'}}>
+    <Box sx={{ display: 'flex', flexDirection: orientation === 'vertical' ? 'row' : 'column' , width: '400px'}}>
       <Tabs
         onChange={handleChange}
         value={value}
-        // el scrollable deberia ser dinamico
-        variant={tabs.length > scroll ? 'scrollable' : 'standard'}
+        variant={tabs.length > scrollOnTabLength ? 'scrollable' : 'standard'}
         scrollButtons="auto"
         orientation={orientation}
         sx={{ borderRight: orientation === 'vertical' ? 1 : 0, borderBottom: orientation === 'horizontal' ? 1 : 0 }}
@@ -72,5 +70,3 @@ function TabPanel({ tabs, orientation = 'horizontal', positionTab, scroll }: Tab
 }
 
 export default TabPanel;
-
-// especificar el tab de altura / tratar de cargar lazy desde el api
