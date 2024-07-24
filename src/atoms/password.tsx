@@ -1,35 +1,31 @@
-import React, {ChangeEvent} from 'react';
+import React, { ChangeEvent } from 'react';
 
 import TextField from './text-field';
+import { TextFieldProps } from './text-field';
 
-import {iconLookup} from './icon-store';
-import {IconButton, InputAdornment, InputLabel} from '@mui/material';
+import { IconButton, InputAdornment, InputLabel } from '@mui/material';
+import { iconLookup } from './icon-store';
 
-interface PasswordProps {
-  error?: boolean;
-  errorHelperText?: string;
-  fullWidth?: boolean;
-  helperText?: string;
-  icon?: boolean;
-  id: string;
-  label: string;
-  name: string;
+interface PasswordProps extends Omit<TextFieldProps, 'onChangeTextField' | 'required'> {
   onChangeCallback: (value: string) => void;
-  required?: boolean;
+  errorHelperText?: string;
+  icon?: boolean;
   value: string;
+  required?: boolean;
+  label: string;
 }
 
 function Password({
+  fullWidth = false,
+  onChangeCallback,
+  helperText,
   error,
   errorHelperText,
-  fullWidth = false,
-  helperText,
   icon,
-  label,
-  name,
-  onChangeCallback,
   required,
   value,
+  label,
+  ...others
 }: PasswordProps) {
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
@@ -37,8 +33,9 @@ function Password({
     setShowPassword(!showPassword);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChangeCallback(e.target.value);
+  };
 
   const renderPasswordIcon = () => {
     if (icon) {
@@ -49,11 +46,7 @@ function Password({
             onClick={handleClickShowPassword}
             edge="end"
           >
-            {showPassword ? (
-              <iconLookup.visibilityoff />
-            ) : (
-              <iconLookup.visibility />
-            )}
+            {showPassword ? <iconLookup.visibilityoff /> : <iconLookup.visibility />}
           </IconButton>
         </InputAdornment>
       );
@@ -61,27 +54,25 @@ function Password({
     return null;
   };
 
-  let newHelperText = helperText;
-
-  if (error) {
-    newHelperText = errorHelperText;
-  }
+  const newHelperText = error ? errorHelperText : helperText;
 
   return (
-    <div>
-      <InputLabel htmlFor="Password" required={false}>
-        {label} {required && <span style={{color: 'red'}}>*</span>}
-      </InputLabel>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <InputLabel htmlFor="Password" />
       <TextField
+        {...others}
         error={Boolean(error)}
         fullWidth={fullWidth}
         helperText={newHelperText}
         id="Password"
-        inputProps={{
-          endAdornment: renderPasswordIcon(), 
+        InputProps={{
+          endAdornment: renderPasswordIcon(),
         }}
-        name={name}
+        label={label}
+        name='Password'
         onChangeTextField={handleChange}
+        required={required}
+        size="small"
         type={showPassword ? 'text' : 'password'}
         value={value}
       />

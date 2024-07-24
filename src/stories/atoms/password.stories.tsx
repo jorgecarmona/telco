@@ -9,24 +9,23 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  argTypes: {
-    id: {table: { disable: true}},
-    name: {table: { disable: true}}
-  },
   args: {
     error: false,
     errorHelperText: '',
     fullWidth: false,
     helperText: '',
     icon: true,
-    id: '',
     label: '',
-    name: '',
     onChangeCallback: (value: string) => {
-      console.log('passeord entered:', value);
+      console.log('password entered:', value);
     },
     required: true,
     value: '',
+  },
+  argTypes: {
+    id: { table: { disable: true } },
+    name: { table: { disable: true } },
+    onChangeCallback: { table: { disable: true } },
   },
 } satisfies Meta<typeof Password>;
 
@@ -36,16 +35,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    icon: false,
-    id: 'password',
-    name: 'password',
     helperText: 'Ingresa tu contraseña',
+    icon: false,
+    id: 'Password',
     label: 'Password',
-    value: '1234567',
+    name: 'Password',
     onChangeCallback: (value) => {
       console.log('Password entered:', value);
     },
     required: false,
+    value: '1234567',
   },
 };
 
@@ -53,9 +52,10 @@ export const WithError: Story = {
   args: {
     error: true,
     errorHelperText: 'Usuario o contraseña incorrectas',
-    id: 'password',
+    icon: false,
+    id: 'Password',
     label: 'Password',
-    name: 'password',
+    name: 'Password',
     onChangeCallback: (value) => {
       console.log('Password entered:', value);
     },
@@ -67,13 +67,12 @@ export const WithError: Story = {
 export const WithIcon: Story = {
   args: {
     icon: true,
-    id: 'password',
+    id: 'Password',
     label: 'Password',
-    name: 'password',
+    name: 'Password',
     onChangeCallback: (value) => {
       console.log('Password entered:', value);
     },
     value: '1234567',
-    required: false,
   },
 };
