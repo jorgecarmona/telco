@@ -3,19 +3,39 @@ import { Snackbar as MuiSnackbar, SnackbarProps as MuiSnackbarProps, SnackbarCon
 import Button from './button';
 import Alert from './alert';
 
-interface SnackbarProps extends MuiSnackbarProps {
-    duration?: number;
+interface BaseSnackbarProps extends MuiSnackbarProps {
     message: string;
     onClose?: () => void;
-    severity?: 'success' | 'info' | 'warning' | 'error';
-    transient?: boolean;
-    type?: 'default' | 'alert';
     vertical?: 'top' | 'bottom';
     horizontal?: 'left' | 'center' | 'right';
     open?: boolean;
 }
 
-export default function Snackbar({
+interface TransientSnackbarProps extends BaseSnackbarProps {
+    transient: true;
+    duration: number;
+}
+
+interface NonTransientSnackbarProps extends BaseSnackbarProps {
+    transient: false;
+    duration?: never;
+}
+
+interface AlertSnackbarProps extends BaseSnackbarProps {
+    type: 'alert';
+    severity: 'success' | 'info' | 'warning' | 'error';
+}
+
+interface DefaultSnackbarProps extends BaseSnackbarProps {
+    type?: 'default';
+    severity?: never;
+}
+
+type SnackbarProps =
+    | (TransientSnackbarProps & (AlertSnackbarProps | DefaultSnackbarProps))
+    | (NonTransientSnackbarProps & (AlertSnackbarProps | DefaultSnackbarProps));
+
+function Snackbar({
     duration = 3000,
     message,
     onClose,
@@ -57,3 +77,5 @@ export default function Snackbar({
         </>
     );
 }
+
+export default Snackbar;
