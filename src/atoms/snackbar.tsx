@@ -1,34 +1,36 @@
 import React from 'react';
-import { Snackbar as MuiSnackbar, SnackbarProps as MuiSnackbarProps, SnackbarContent as MuiSnackbarContent, Collapse, Grow, } from '@mui/material';
+
+import { Snackbar as MuiSnackbar, SnackbarProps as MuiSnackbarProps, SnackbarContent as MuiSnackbarContent, Collapse,} from '@mui/material';
+
 import Button from './button';
 import Alert from './alert';
 
 interface BaseSnackbarProps extends MuiSnackbarProps {
+    horizontal?: 'left' | 'center' | 'right';
     message: string;
     onClose?: () => void;
-    vertical?: 'top' | 'bottom';
-    horizontal?: 'left' | 'center' | 'right';
     open?: boolean;
+    vertical?: 'top' | 'bottom';
 }
 
 interface TransientSnackbarProps extends BaseSnackbarProps {
-    transient: true;
     duration: number;
+    transient: true;
 }
 
 interface NonTransientSnackbarProps extends BaseSnackbarProps {
-    transient: false;
     duration?: never;
+    transient: false;
 }
 
 interface AlertSnackbarProps extends BaseSnackbarProps {
-    type: 'alert';
     severity: 'success' | 'info' | 'warning' | 'error';
+    type: 'alert';
 }
 
 interface DefaultSnackbarProps extends BaseSnackbarProps {
-    type?: 'default';
     severity?: never;
+    type?: 'default';
 }
 
 type SnackbarProps =
@@ -37,14 +39,14 @@ type SnackbarProps =
 
 function Snackbar({
     duration = 3000,
+    horizontal = 'left',
     message,
     onClose,
+    open = false,
     severity = 'info',
     transient = true,
     type = 'default',
     vertical = 'bottom',
-    horizontal = 'left',
-    open = false,
     }: SnackbarProps) {
 
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
@@ -72,7 +74,6 @@ function Snackbar({
                     ) : (
                     <MuiSnackbarContent message={message} action={<Button onClick={handleClose}>Close</Button>} />
                 )}
-            
             </MuiSnackbar>
         </>
     );

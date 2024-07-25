@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {Meta, StoryObj} from '@storybook/react';
 
 import { Button, Snackbar } from '../../atoms';
@@ -12,41 +13,41 @@ const meta = {
     tags: ['autodocs'],
     argTypes: {
         duration: {
-            description: 'Set duration',
             control: 'number',
+            description: 'Set duration',
             if: { arg: 'transient', eq: true },
         },
         horizontal: {
-            description: 'Select horizontal position',
             control: 'select',
+            description: 'Select horizontal position',
             options: ['left', 'center', 'right'],
         },
         message: {
+            control:'text',
             description: 'Message to display', 
-            control:'text'
         },
+        onClose: { table: { disable: true } },
+        open: { table: { disable: true } },
         severity: {
-            description: 'Select severity',
             control: 'select',
+            description: 'Select severity',
             options: ['success', 'info', 'warning', 'error'],
             if: { arg: 'type', eq: 'alert' },
         },
         transient: {
-            description: 'Set transient',
             control: 'boolean',
+            description: 'Set transient',
         },
         type: {
-            description: 'Select type',
             control: 'select',
+            description: 'Select type',
             options: ['default', 'alert'],
         },
         vertical: {
-            description: 'Select vertical position',
             control: 'select',
+            description: 'Select vertical position',
             options: ['top', 'bottom'],
         },
-        open: { table: { disable: true } },
-        onClose: { table: { disable: true } },
     },
 
 } satisfies Meta<typeof Snackbar>;
@@ -65,7 +66,7 @@ const SnackbarTemplate = (args: any) => {
     return (
         <div>
             <Button onClick={handleOpen}>Show Snackbar</Button>
-            <Snackbar {...args} open={open} onClose={() => setOpen(false)} />
+            <Snackbar onClose={() => setOpen(false)} open={open} {...args}/>
         </div>
     );
 };
@@ -73,63 +74,63 @@ const SnackbarTemplate = (args: any) => {
 export const Default: Story = {
     render: (args) => <SnackbarTemplate {...args} />,
     args: {
-        message: 'This is a default message',
-        type: 'default',
         duration: 3000,
-        transient: true,
-        vertical: 'bottom',
         horizontal: 'left',
+        message: 'This is a default message',
+        transient: true,
+        type: 'default',
+        vertical: 'bottom',
     },
 };
 
 export const SuccessAlert: Story = {
     render: (args) => <SnackbarTemplate {...args} />,
     args: {
-        message: 'Operation was successful!',
-        severity: 'success',
-        type: 'alert',
         duration: 3000,
+        horizontal: 'center',
+        message: 'Operation was successful!',
         transient: true,
+        type: 'alert',
+        severity: 'success',
         vertical: 'bottom',
-        horizontal: 'center'
     },
 };
 
 export const ErrorAlert: Story = {
     render: (args) => <SnackbarTemplate {...args} />,
     args: {
-        message: 'Something went wrong!',
-        severity: 'error',
-        type: 'alert',
         duration: 5000,
+        horizontal: 'right',
+        message: 'Something went wrong!',
         transient: true,
+        type: 'alert',
+        severity: 'error',
         vertical: 'top',
-        horizontal: 'right'
     },
 };
 
 export const InfoAlert: Story = {
     render: (args) => <SnackbarTemplate {...args} />,
     args: {
-        message: 'Here is some information.',
-        severity: 'info',
-        type: 'alert',
         duration: 4000,
+        horizontal: 'left',
+        message: 'Here is some information.',
         transient: true,
+        type: 'alert',
+        severity: 'info',
         vertical: 'bottom',
-        horizontal: 'left'
     },
 };
 
 export const WarningAlert: Story = {
     render: (args) => <SnackbarTemplate {...args} />,
     args: {
-        message: 'Warning!',
-        severity: 'warning',
-        type: 'alert',
         duration: 6000,
+        horizontal: 'center',
+        message: 'Warning!',
         transient: true,
+        type: 'alert',
+        severity: 'warning',
         vertical: 'top',
-        horizontal: 'center'
     },
 };
