@@ -1,38 +1,44 @@
 import React from 'react';
-import {  Button, Dialog as MuiDialog, DialogProps as MuiDialogProps, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 
-//estender Propiedades con la interface de MUI 
-interface DialogProps {
-  type: 'alert' | 'form' | 'size';
-  label: string;
-  title: React.ReactNode | string;
-  buttonType?: 'button' ;
-  open: boolean;
-  onClose: () => void;
-  content: React.ReactNode;
+import { Button, Dialog as MuiDialog, DialogActions, DialogContent,  DialogContentText, DialogProps as MuiDialogProps, DialogTitle } from '@mui/material';
+
+interface DialogProps extends Omit<MuiDialogProps,  'content'|'title' > {
   actions?: React.ReactNode;
+  buttonType?: 'button';
+  content: React.ReactNode | string | undefined;
+  label: string;
   size: 'sm' | 'md' | 'lg';
+  title: React.ReactNode | string;
+  type: 'alert' | 'form' | 'size';
 }
 
-
-function Dialog ({ 
-  type, 
-  label, 
-  title, 
-  buttonType = 'button', 
-  open, 
-  onClose, 
-  content, 
+function Dialog({ 
   actions, 
-  size = 'lg'
+  buttonType = 'button', 
+  content, 
+  label, 
+  onClose, 
+  open, 
+  size = 'lg', 
+  title, 
+  type, 
+  ...rest
 }: DialogProps) {
+  
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (onClose) {
+      onClose(event, "backdropClick"); 
+    }
+  };
+
   return (
     <MuiDialog
-      open={open}
-      onClose={onClose}
-      aria-labelledby="dialog-title"
       aria-describedby="dialog-content"
+      aria-labelledby="dialog-title"
       maxWidth={size}
+      onClose={onClose}
+      open={open}
+      {...rest} 
     >
       <DialogTitle id="dialog-title">{title}</DialogTitle>
       <DialogContent>
@@ -40,7 +46,7 @@ function Dialog ({
       </DialogContent>
       <DialogActions>
         {type === 'form' && actions}
-        <Button onClick={onClose} type={type === 'form' ? buttonType : 'button'} color="primary">
+        <Button onClick={handleButtonClick} type={type === 'form' ? buttonType : 'button'} color="primary">
           {label}
         </Button>
       </DialogActions>
