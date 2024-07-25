@@ -1,199 +1,222 @@
-import React from 'react';
+import { Meta, StoryObj } from '@storybook/react/';
 
-import TabPanel, {TabConfig} from '../../atoms/tab-panel';
+import TabPanel from '../../atoms/tab-panel';
 import { IconType } from '../../atoms/icon-store';
 
-export default {
-  title: 'Atoms/TabPanel',
+const meta: Meta<typeof TabPanel> = {
+  args: {
+    initialTabIndex: 0,
+    orientation: 'horizontal',
+    scrollOnTabLength: 1,
+  },
+  argTypes: {
+    initialTabIndex: {
+      control: 'number',
+      description: 'Select initial tab',
+    },
+    orientation: {
+      control: 'select',
+      description: 'Select orientation',
+      options: ['horizontal', 'vertical'],
+    },
+    scrollOnTabLength: {
+      control: 'number',
+      description: 'Increase length',
+    },
+    tabs: { table: { disable: true } },
+  },
   component: TabPanel,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  title: 'Atoms/TabPanel',
 };
 
-const tabs: TabConfig[] = [
-  {
-    label: 'Tab 1',
-    value: 0,
-    component: <div>Contenido de la pestaña 1</div>,
-  },
-  {
-    label: 'Tab 2',
-    value: 1,
-    component: <div>Contenido de la pestaña 2</div>,
-  },
-];
+export default meta;
 
-export const HorizontalTabs = () => (
-  <TabPanel tabs={tabs} orientation="horizontal" positionTab={0} scroll={3} />
-);
+type Story = StoryObj<typeof TabPanel>;
 
-export const VerticalTabs = () => (
-  <TabPanel tabs={tabs} orientation="vertical" positionTab={0} scroll={3} />
-);
-
-export const TabsWithIcons = () => (
-  <TabPanel
-    tabs={[
+export const DefaultTabs: Story = {
+  args: {
+    orientation: 'horizontal',
+    tabs: [
       {
+        component: <div>Contenido de la pestaña 1</div>,
         label: 'Tab 1',
         value: 0,
-        component: <div>Contenido de la pestaña 1</div>,
-        icon: IconType.Dashboard,
       },
       {
+        component: <div>Contenido de la pestaña 2</div>,
         label: 'Tab 2',
         value: 1,
-        component: <div>Contenido de la pestaña 2</div>,
-        icon: IconType.Business,
       },
       {
-        label: 'Tab 3',
-        value: 2,
-        component: <div>Contenido de la pestaña 2</div>,
-        icon: IconType.Help,
-      },
-    ]}
-    orientation="horizontal"
-    positionTab={0}
-    scroll={3}
-  />
-);
-
-export const TabsWithDisabledTab = () => (
-  <TabPanel
-    tabs={[
-      {
-        label: 'Tab Habilitado',
-        value: 0,
-        component: <div>Contenido de la pestaña 1</div>,
-      },
-      {
-        label: 'Tab Deshabilitado',
-        value: 1,
-        component: <div>Contenido de la pestaña 2</div>,
-        disabled: true,
-      },
-    ]}
-    orientation="horizontal"
-    positionTab={0}
-    scroll={3}
-  />
-);
-
-export const TabsWithCustomCallback = () => (
-  <TabPanel
-    tabs={[
-      {
-        label: 'Tab 1',
-        value: 0,
-        component: <div>Contenido de la pestaña 1</div>,
-        callBack: () => console.log('Callback de Tab 1'),
-      },
-      {
-        label: 'Tab 2',
-        value: 1,
-        component: <div>Contenido de la pestaña 2</div>,
-        callBack: () => console.log('Callback de Tab 2'),
-      },
-      {
-        label: 'Tab 3',
-        value: 2,
         component: <div>Contenido de la pestaña 3</div>,
-        callBack: () => console.log('Callback de Tab 3'),
+        label: 'Tab 3',
+        value: 2,
       },
-    ]}
-    orientation="horizontal"
-    positionTab={0}
-    scroll={3}
-  />
-);
-
-export const TabsWithCustomIcons = () => (
-  <TabPanel
-    tabs={[
       {
+        component: <div>Contenido de la pestaña 4</div>,
+        label: 'Tab 4',
+        value: 3,
+      },
+      {
+        component: <div>Contenido de la pestaña 5</div>,
+        label: 'Tab 5',
+        value: 4,
+      },
+      {
+        component: <div>Contenido de la pestaña 6</div>,
+        label: 'Tab 6',
+        value: 5,
+      },
+      {
+        component: <div>Contenido de la pestaña 7</div>,
+        label: 'Tab 7',
+        value: 6,
+      },
+    ],
+  },
+};
+
+export const HorizontalTabs: Story = {
+  args: {
+    orientation: 'horizontal',
+    tabs: [
+      {
+        component: <div>Contenido de la pestaña 1</div>,
         label: 'Tab 1',
         value: 0,
+      },
+      {
+        component: <div>Contenido de la pestaña 2</div>,
+        label: 'Tab 2',
+        value: 1,
+      },
+    ],
+  },
+};
+
+export const TabsWithCustomCallback: Story = {
+  args: {
+    tabs: [
+      {
+        callBack: () => console.log('Callback de Tab 1'),
+        component: <div>Contenido de la pestaña 1</div>,
+        label: 'Tab 1',
+        value: 0,
+      },
+      {
+        callBack: () => console.log('Callback de Tab 2'),
+        component: <div>Contenido de la pestaña 2</div>,
+        label: 'Tab 2',
+        value: 1,
+      },
+      {
+        callBack: () => console.log('Callback de Tab 3'),
+        component: <div>Contenido de la pestaña 3</div>,
+        label: 'Tab 3',
+        value: 2,
+      },
+    ],
+  },
+};
+
+export const TabsWithCustomIcons: Story = {
+  args: {
+    tabs: [
+      {
         component: <div>Contenido de la pestaña 1</div>,
         icon: IconType.Dashboard,
         iconPosition: 'start',
+        label: 'Tab 1',
+        value: 0,
       },
       {
-        label: 'Tab 2',
-        value: 1,
         component: <div>Contenido de la pestaña 2</div>,
-        icon: IconType.Business ,
+        icon: IconType.Business,
         iconPosition: 'end',
+        label: 'Tab 2',
+        value: 1,
       },
       {
-        label: 'Tab 3',
-        value: 2,
         component: <div>Contenido de la pestaña 3</div>,
-        icon: IconType.Help ,
+        icon: IconType.Help,
         iconPosition: 'top',
-      },
-    ]}
-    orientation="horizontal"
-    positionTab={0}
-    scroll={3}
-  />
-);
-
-export const TabsWithCustomSize = () => (
-  <TabPanel
-    tabs={[
-      {
-        label: 'Tab 1',
-        value: 0,
-        component: <div>Contenido de la pestaña 1</div>,
-        tabHeight: '50px',
-        tabWidth: '100px',
-      },
-      {
-        label: 'Tab 2',
-        value: 1,
-        component: <div>Contenido de la pestaña 2</div>,
-        tabHeight: '50px',
-        tabWidth: '100px',
-      },
-      {
         label: 'Tab 3',
         value: 2,
-        component: <div>Contenido de la pestaña 3</div>,
+      },
+    ],
+  },
+};
+
+export const TabsWithCustomSize: Story = {
+  args: {
+    tabs: [
+      {
+        component: <div>Contenido de la pestaña 1</div>,
+        label: 'Tab 1',
         tabHeight: '50px',
         tabWidth: '100px',
+        value: 0,
       },
-    ]}
-    orientation="horizontal"
-    positionTab={0}
-    scroll={3}
-  />
-);
-
-export const TabsWithDynamicScrollable = () => (
-  <TabPanel
-    tabs={[
       {
+        component: <div>Contenido de la pestaña 2</div>,
+        label: 'Tab 2',
+        tabHeight: '50px',
+        tabWidth: '100px',
+        value: 1,
+      },
+      {
+        component: <div>Contenido de la pestaña 3</div>,
+        label: 'Tab 3',
+        tabHeight: '50px',
+        tabWidth: '100px',
+        value: 2,
+      },
+    ],
+  },
+};
+
+export const TabsWithDisabledTab: Story = {
+  args: {
+    tabs: [
+      {
+        component: <div>Contenido de la pestaña 1</div>,
+        disabled: false,
+        label: 'Tab Habilitado',
+        value: 0,
+      },
+      {
+        component: <div>Contenido de la pestaña 2</div>,
+        disabled: true,
+        label: 'Tab Deshabilitado',
+        value: 1,
+      },
+    ],
+  },
+};
+
+export const TabsWithDynamicScrollable: Story = {
+  args: {
+    tabs: [
+      {
+        component: <div>Contenido de la pestaña 1</div>,
         label: 'Tab 1',
         value: 0,
-        component: <div>Contenido de la pestaña 1</div>,
       },
       {
+        component: <div>Contenido de la pestaña 2</div>,
         label: 'Tab 2',
         value: 1,
-        component: <div>Contenido de la pestaña 2</div>,
       },
       {
+        component: <div>Contenido de la pestaña 3</div>,
         label: 'Tab 3',
         value: 2,
-        component: <div>Contenido de la pestaña 3</div>,
       },
-    ]}
-    orientation="horizontal"
-    positionTab={0}
-    scroll={3} 
-  />
-);
+    ],
+  },
+};
 

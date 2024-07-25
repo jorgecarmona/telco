@@ -1,33 +1,34 @@
 import React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import { IconType, iconLookup } from '../atoms/icon-store';
 
 export interface TabConfig {
-  label: string;
-  value: number;
-  component: React.ReactNode;
-  icon?: IconType;
-  disabled?: boolean;
   callBack?: () => void;
-  iconPosition?: 'top' | 'bottom' | 'end' | 'start';
+  component: React.ReactNode;
+  disabled?: boolean;
+  icon?: IconType;
+  iconPosition?:  'bottom' | 'end' | 'start' | 'top';
+  label: string;
   tabHeight?: string | number;
   tabWidth?: string | number;
+  value: number;
 }
 
 interface TabPanelProps {
-  tabs: TabConfig[];
+  initialTabIndex: number;
   orientation?: 'horizontal' | 'vertical';
-  positionTab: number;
-  scroll: number;
+  scrollOnTabLength: number;
+  tabs: TabConfig[];
 }
 
-function TabPanel({ tabs, orientation = 'horizontal', positionTab, scroll }: TabPanelProps) {
-  // que el tab que se abre por default pueda ser especificado por el usuario
-  const initialTabValue = tabs.find(tab => tab.value === positionTab)?.value || 0;
+function TabPanel({ tabs, orientation = 'horizontal', scrollOnTabLength, initialTabIndex }: TabPanelProps) {
+  const initialTabValue = tabs.find(tab => tab.value === initialTabIndex)?.value || 0;
   const [value, setValue] = React.useState<number>(initialTabValue);
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
 
@@ -37,27 +38,26 @@ function TabPanel({ tabs, orientation = 'horizontal', positionTab, scroll }: Tab
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: orientation === 'vertical' ? 'row' : 'column' , width:'300px'}}>
+    <Box sx={{ display: 'flex', flexDirection: orientation === 'vertical' ? 'row' : 'column', width: '400px' }}>
       <Tabs
         onChange={handleChange}
-        value={value}
-        // el scrollable deberia ser dinamico
-        variant={tabs.length > scroll ? 'scrollable' : 'standard'}
-        scrollButtons="auto"
         orientation={orientation}
-        sx={{ borderRight: orientation === 'vertical' ? 1 : 0, borderBottom: orientation === 'horizontal' ? 1 : 0 }}
+        scrollButtons="auto"
+        sx={{ borderBottom: orientation === 'horizontal' ? 1 : 0, borderRight: orientation === 'vertical' ? 1 : 0 }}
+        value={value}
+        variant={tabs.length > scrollOnTabLength ? 'scrollable' : 'standard'}
       >
         {tabs.map((tab) => {
           const Icon = tab.icon ? iconLookup[tab.icon] : undefined;
           return (
             <Tab
               key={tab.value}
-              label={tab.label}
-              icon={Icon && <Icon />}
               disabled={tab.disabled}
-              value={tab.value}
+              icon={Icon && <Icon />}
               iconPosition={tab.iconPosition}
+              label={tab.label}
               sx={{ height: tab.tabHeight, width: tab.tabWidth }}
+              value={tab.value}
             />
           );
         })}
@@ -72,5 +72,3 @@ function TabPanel({ tabs, orientation = 'horizontal', positionTab, scroll }: Tab
 }
 
 export default TabPanel;
-
-// especificar el tab de altura / tratar de cargar lazy desde el api

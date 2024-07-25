@@ -61,6 +61,6 @@ const tabs: TabConfig[] = [
 
 describe('TabPanel Component', () => {
   it('renders with default properties', () => {
-    render(<TabPanel tabs={tabs} positionTab={2} scroll={2}/>)
+    render(<TabPanel tabs={tabs} scrollOnTabLength={2} initialTabIndex={2}/>)
   });
 });
