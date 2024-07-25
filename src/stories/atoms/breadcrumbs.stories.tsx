@@ -1,8 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react';
-
 import {action} from '@storybook/addon-actions';
-import {fn} from '@storybook/test';
-
 import BreadCrumbs from '../../atoms/breadcrumbs';
 
 const meta = {
@@ -12,16 +9,10 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  args: {
-    separator: '>',
-    items: [
-      {label: 'Home', path: '/'},
-      {label: 'Employers', path: '/employers'},
-      {label: 'Company', path: '/company'},
-      {label: 'Settings', path: '/settings'},
-      {label: 'My Page', path: '/mypage'},
-    ],
-    onClick: fn(),
+  argTypes: {
+    separator: { control: 'text' },
+    items: { control: 'object' },
+    onClick: { action: 'clicked' },
   },
 } satisfies Meta<typeof BreadCrumbs>;
 
@@ -35,16 +26,34 @@ export const Default: Story = {
     items: [
       {label: 'Home', path: '/'},
       {label: 'Employers', path: '/employers'},
-      {label: 'Company', path: '/company'},
-      {label: 'Settings', path: '/settings'},
-      {label: 'My Page', path: '/mypage'},
     ],
     onClick: action('breadcrumb was clicked') as any,
   },
   parameters: {
     docs: {
       description: {
-        story: 'This story uses Default to style',
+        story: 'This story is showing a simple path',
+      },
+    },
+  },
+};
+
+export const MultipleItems: Story = {
+  args: {
+    separator: '>',
+    items: [
+      { label: 'Home', path: '/' },
+      { label: 'Employers', path: '/employers' },
+      { label: 'Company', path: '/employers/company' },
+      { label: 'Employee', path: '/employers/company/employee' },
+      { label: 'Data', path: '/employers/company/employee/data' },
+    ],
+    onClick: action('breadcrumb was clicked') as any,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'This story uses multiple items',
       },
     },
   },

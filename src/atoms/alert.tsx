@@ -1,14 +1,15 @@
 import React from 'react';
 
-import {Alert as MuiAlert, AlertTitle as MuiAlertTitle} from '@mui/material';
+import { Alert as MuiAlert, AlertTitle as MuiAlertTitle, AlertProps as MuiAlertProps } from '@mui/material';
 
-interface AlertProps {
+interface AlertProps extends MuiAlertProps {
   severity: 'error' | 'info' | 'success' | 'warning';
+  title?: string;
   onClose?: () => void;
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
-function Alert({severity, onClose, children}: AlertProps) {
+function Alert({ severity, title, onClose, children, ...rest }: AlertProps) {
   const [open, setOpen] = React.useState(true);
 
   const handleClose = () => {
@@ -21,18 +22,14 @@ function Alert({severity, onClose, children}: AlertProps) {
   if (!open) return null;
 
   const AlertTitle = (severity: 'error' | 'info' | 'success' | 'warning') => {
-    switch (severity) {
-      case 'error':
-        return 'Error';
-      case 'info':
-        return 'Info';
-      case 'success':
-        return 'Success';
-      case 'warning':
-        return 'Warning';
-      default:
-        return '';
-    }
+    const titles: Record<'error' | 'info' | 'success' | 'warning', string> = {
+      'error': 'Error',
+      'info': 'Info',
+      'success': 'Success',
+      'warning': 'Warning',
+    };
+  
+    return titles[severity] || '';
   };
 
   return (
@@ -44,8 +41,9 @@ function Alert({severity, onClose, children}: AlertProps) {
           fontWeight: 'bold',
         },
       }}
+      {...rest}
     >
-      <MuiAlertTitle>{AlertTitle(severity)}</MuiAlertTitle>
+      <MuiAlertTitle>{title || AlertTitle(severity)}</MuiAlertTitle> 
       {children}
     </MuiAlert>
   );

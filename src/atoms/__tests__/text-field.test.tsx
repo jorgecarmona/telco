@@ -1,38 +1,55 @@
-import {render, screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import TextField from '../../atoms/textField';
+import TextField from '../text-field';
 
 describe('TextField Component', () => {
   it('renders the label correctly', () => {
-    render(<TextField label="Name" value="" onChangeTextField={() => {console.log('function is called')}} />);
+    render(
+      <TextField
+        label="Name"
+        value=""
+        onChangeTextField={() => {
+          console.log('function is called');
+        }}
+        id="123"
+        name="Text Field"
+      />,
+    );
 
     const labelElement = screen.getByText(/Name/i);
     expect(labelElement).toBeInTheDocument();
   });
 
-  it.skip('displays the required asterisk when required is true', () => {
+  it('displays the required asterisk when required is true', () => {
     render(
       <TextField
+        id="123"
         label="Email"
+        name="Text Field"
+        onChangeTextField={() => {
+          console.log('function is called');
+        }}
         required
         value=""
-        onChangeTextField={() => {console.log('function is called')}}
       />,
     );
 
-    const asteriskElement = screen.getByDisplayValue(`"*"`);
-    expect(asteriskElement).toBeInTheDocument();
-    expect(asteriskElement).toHaveStyle({color: 'red'});
+    const requiredIndicator = screen.getByText(/email/i);
+    expect(requiredIndicator).toHaveClass('required-field');
   });
 
   it('renders textfield with icon and helpertext', () => {
     render(
       <TextField
-        label="Email"
+        id="123"
         icon={true}
+        label="Email"
+        name="Text Field"
+        onChangeTextField={() => {
+          console.log('function is called');
+        }}
         value=""
-        onChangeTextField={() => {console.log('function is called')}}
       />,
     );
   });
@@ -40,10 +57,14 @@ describe('TextField Component', () => {
   it('does not display the icon when icon is false', () => {
     render(
       <TextField
-        label="Email"
+        id="123"
         icon={false}
+        label="Email"
+        name="Text Field"
+        onChangeTextField={() => {
+          console.log('function is called');
+        }}
         value=""
-        onChangeTextField={() => {console.log('function is called')}}
       />,
     );
 
@@ -54,10 +75,14 @@ describe('TextField Component', () => {
   it('displays helper text when provided', () => {
     render(
       <TextField
-        label="Email"
+        id="123"
         helperText="This is a helper text"
+        label="Email"
+        name="Text Field"
+        onChangeTextField={() => {
+          console.log('function is called');
+        }}
         value=""
-        onChangeTextField={() => {console.log('function is called')}}
       />,
     );
 
@@ -70,9 +95,11 @@ describe('TextField Component', () => {
 
     render(
       <TextField
+        id="123"
         label="Name"
-        value=""
+        name="Text Field"
         onChangeTextField={handleTextFieldChangeMock}
+        value=""
       />,
     );
 

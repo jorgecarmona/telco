@@ -1,11 +1,13 @@
-import React from 'react';
-import {render, screen, fireEvent, cleanup} from '@testing-library/react';
+import {render, screen, cleanup} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
+
 import Alert from '../../atoms/alert';
 
 afterEach(cleanup);
 
 describe('Alert component', () => {
+
   it('renders the correct title and message for each alert type', () => {
     const alertTypes: Array<'error' | 'info' | 'success' | 'warning'> = [
       'error',
@@ -13,7 +15,6 @@ describe('Alert component', () => {
       'success',
       'warning',
     ];
-
     alertTypes.forEach((severity) => {
       render(<Alert severity={severity}>Test {severity} message</Alert>);
       expect(
@@ -24,15 +25,15 @@ describe('Alert component', () => {
     });
   });
 
-  it('closes the alert when the close button is clicked', () => {
+  it('closes the alert when the close button is clicked', async () => {
     render(<Alert severity="error">Test error message</Alert>);
-
+    
     expect(screen.getByText('Error')).toBeInTheDocument();
     expect(screen.getByText('Test error message')).toBeInTheDocument();
-
+    
     const closeButton = screen.getByRole('button');
-    fireEvent.click(closeButton);
-
+    await userEvent.click(closeButton);
+    
     expect(screen.queryByText('Error')).not.toBeInTheDocument();
     expect(screen.queryByText('Test error message')).not.toBeInTheDocument();
   });
@@ -44,25 +45,24 @@ describe('Alert component', () => {
         Test info message
       </Alert>,
     );
-
     const closeButton = screen.getByRole('button');
-    fireEvent.click(closeButton);
-
+    userEvent.click(closeButton);
     expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
 
-  it('does not render anything when open state is false', () => {
-    const {rerender} = render(
+  it('does not render anything when open state is false', async () => {
+    const { rerender } = render(
       <Alert severity="success">Test success message</Alert>,
     );
-
+    
     expect(screen.getByText('Success')).toBeInTheDocument();
     expect(screen.getByText('Test success message')).toBeInTheDocument();
-
-    rerender(<Alert severity="success">Test success message</Alert>);
+    
     const closeButton = screen.getByRole('button');
-    fireEvent.click(closeButton);
-
+    await userEvent.click(closeButton);
+    
+    rerender(<Alert severity="success">Test success message</Alert>);
+    
     expect(screen.queryByText('Success')).not.toBeInTheDocument();
     expect(screen.queryByText('Test success message')).not.toBeInTheDocument();
   });
