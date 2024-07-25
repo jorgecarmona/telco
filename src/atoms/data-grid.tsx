@@ -14,6 +14,7 @@ interface DataGridProps extends Omit<MuiDataGridProps, 'columns' | 'rows'> {
   pageSize?: number;
   pageSizeOptions?: number[];
   checkboxSelection?: boolean;
+  disableColumnSorting?: boolean;
 }
 
 function DataGrid({
@@ -22,6 +23,7 @@ function DataGrid({
   pageSize = 5,
   pageSizeOptions = [5],
   checkboxSelection = false,
+  disableColumnSorting = false,
   ...other
 }: DataGridProps) {
   const [sortModel, setSortModel] = useState<GridSortModel>([]);
@@ -31,7 +33,9 @@ function DataGrid({
   });
 
   const handleSortModelChange = (model: GridSortModel) => {
-    setSortModel(model);
+    if (!disableColumnSorting) {
+      setSortModel(model);
+    }
   };
 
   const handlePaginationModelChange = (model: GridPaginationModel) => {
@@ -42,7 +46,10 @@ function DataGrid({
     <Box sx={{ height: 700, width: '100%' }}>
       <MuiDataGrid
         rows={rows}
-        columns={columns}
+        columns={columns.map((col) => ({
+          ...col,
+          sortable: !disableColumnSorting,
+        }))}
         paginationModel={paginationModel}
         onPaginationModelChange={handlePaginationModelChange}
         pageSizeOptions={pageSizeOptions}
