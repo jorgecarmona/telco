@@ -98,6 +98,79 @@ export const HorizontalTabs: Story = {
   },
 };
 
+export const VerticalTabs: Story = {
+  args: {
+    orientation: 'vertical',
+    tabs: [
+      {
+        component: <div>Contenido de la pestaña 1</div>,
+        label: 'Tab 1',
+        value: 0,
+      },
+      {
+        component: <div>Contenido de la pestaña 2</div>,
+        label: 'Tab 2',
+        value: 1,
+      },
+    ],
+  },
+};
+
+export const TabsWithIcons: Story = {
+  args: {
+    tabs: [
+      {
+        component: <div>Contenido de la pestaña 1</div>,
+        icon: IconType.Dashboard,
+        label: 'Tab 1',
+        value: 0,
+      },
+      {
+        component: <div>Contenido de la pestaña 2</div>,
+        icon: IconType.Business,
+        label: 'Tab 2',
+        value: 1,
+      },
+      {
+        component: <div>Contenido de la pestaña 3</div>,
+        icon: IconType.Help,
+        label: 'Tab 3',
+        value: 2,
+      },
+      {
+        component: <div>Contenido de la pestaña 3</div>,
+        icon: IconType.Help,
+        label: 'Tab 4',
+        value: 3,
+      },
+      {
+        component: <div>Contenido de la pestaña 3</div>,
+        icon: IconType.Help,
+        label: 'Tab 5',
+        value: 4,
+      },
+    ],
+  },
+};
+
+export const TabsWithDisabledTab: Story = {
+  args: {
+    tabs: [
+      {
+        component: <div>Contenido de la pestaña 1</div>,
+        label: 'Tab Habilitado',
+        value: 0,
+      },
+      {
+        component: <div>Contenido de la pestaña 2</div>,
+        disabled: true,
+        label: 'Tab Deshabilitado',
+        value: 1,
+      },
+    ],
+  },
+};
+
 export const TabsWithCustomCallback: Story = {
   args: {
     tabs: [
@@ -179,25 +252,6 @@ export const TabsWithCustomSize: Story = {
   },
 };
 
-export const TabsWithDisabledTab: Story = {
-  args: {
-    tabs: [
-      {
-        component: <div>Contenido de la pestaña 1</div>,
-        disabled: false,
-        label: 'Tab Habilitado',
-        value: 0,
-      },
-      {
-        component: <div>Contenido de la pestaña 2</div>,
-        disabled: true,
-        label: 'Tab Deshabilitado',
-        value: 1,
-      },
-    ],
-  },
-};
-
 export const TabsWithDynamicScrollable: Story = {
   args: {
     tabs: [
@@ -219,4 +273,3 @@ export const TabsWithDynamicScrollable: Story = {
     ],
   },
 };
-
