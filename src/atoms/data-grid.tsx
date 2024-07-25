@@ -1,19 +1,25 @@
 import React from 'react';
-import { DataGrid as MuiDataGrid, DataGridProps as MuiDataGridProps, GridColDef } from '@mui/x-data-grid';
+import { DataGrid as MuiDataGrid, GridColDef, GridFilterModel} from '@mui/x-data-grid';
 
-interface DataGridProps extends Omit<MuiDataGridProps, 'columns' | 'rows'> {
+interface DataGridProps {
   columns: GridColDef[];
   rows: Record<string, unknown>[];
+  disableColumnFilter: boolean;
+  filterModel?: GridFilterModel;
 }
 
-function DataGrid({ columns, rows, ...other }: DataGridProps) {
+function DataGrid({ columns, rows, disableColumnFilter, filterModel, ...other}: DataGridProps) {
+
   return (
-      <div style={{ height: 700}}>
-        <MuiDataGrid 
+    <div style={{ height: 600, width: '100%' }}>
+      <MuiDataGrid 
         rows={rows} 
         columns={columns} 
-        {...other} />
-      </div>
+        disableColumnFilter={disableColumnFilter}
+        filterModel={filterModel}
+        {...other}
+      />
+    </div>
   );
 }
 
