@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Button, Dialog as MuiDialog, DialogActions, DialogContent,  DialogContentText, DialogProps as MuiDialogProps, DialogTitle } from '@mui/material';
+import { Button, Dialog as MuiDialog, DialogActions, DialogContent, DialogContentText, DialogProps as MuiDialogProps, DialogTitle } from '@mui/material';
 
-interface DialogProps extends Omit<MuiDialogProps,  'content'|'title' > {
+interface DialogProps extends Omit<MuiDialogProps, 'content' | 'title'> {
   actions?: React.ReactNode;
-  buttonType?: 'button';
+  buttonType?: 'button' | 'submit'; 
   content: React.ReactNode | string | undefined;
   label: string;
   size: 'sm' | 'md' | 'lg';
@@ -38,7 +38,7 @@ function Dialog({
       maxWidth={size}
       onClose={onClose}
       open={open}
-      {...rest} 
+      {...rest}
     >
       <DialogTitle id="dialog-title">{title}</DialogTitle>
       <DialogContent>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { Dialog } from '../../atoms';
 import Button from '@mui/material/Button';
 
@@ -11,7 +13,10 @@ const meta: Meta<typeof Dialog> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    type: { control: 'radio', options: ['alert', 'form', 'size'] },
+    type: {
+      control: 'radio',
+      options: ['alert', 'form', 'size'],
+    },
   },
 };
 
@@ -19,14 +24,14 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AlertDialog: Story = {
+const Template: Story = {
   render: (args) => {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
     return (
       <>
         <Button variant="outlined" onClick={() => setOpen(true)}>
-          Open Alert Dialog
+          Open {args.type.charAt(0).toUpperCase() + args.type.slice(1)} Dialog
         </Button>
         <Dialog {...args} open={open} onClose={() => setOpen(false)} />
       </>
@@ -34,56 +39,43 @@ export const AlertDialog: Story = {
   },
   args: {
     actions: <Button onClick={() => alert('Cancel')}>Cancelar</Button>,
+    content: 'Este es un mensaje.',
+    label: 'OK',
+    size: 'md',
+    title: 'Dialog',
+    type: 'alert',
+  },
+};
+
+export const AlertDialog: Story = {
+  ...Template,
+  args: {
+    ...Template.args,
     content: 'Este es un mensaje de alerta.',
     label: 'AGREE',
-    size: 'md',
     title: 'Alert',
     type: 'alert',
   },
 };
 
 export const FormDialog: Story = {
-  render: (args) => {
-    const [open, setOpen] = useState(true);
-
-    return (
-      <>
-        <Button variant="outlined" onClick={() => setOpen(true)}>
-          Open Form Dialog
-        </Button>
-        <Dialog {...args} open={open} onClose={() => setOpen(false)} />
-      </>
-    );
-  },
+  ...Template,
   args: {
-    actions: <Button onClick={() => alert('Cancel')}>Cancelar</Button>,
-    content: 'Este es un mensaje.',
-    label: 'Subscribe',
-    size: 'md',
-    title: 'Subscribe',
-    type: 'form',  
+    ...Template.args,
+    content: 'Este es un formulario.',
+    label: 'Submit',
+    title: 'Form',
+    type: 'form',
   },
 };
 
 export const SizeDialog: Story = {
-  render: (args) => {
-    const [open, setOpen] = useState(true);
-
-    return (
-      <>
-        <Button variant="outlined" onClick={() => setOpen(true)}>
-          Open Size Dialog
-        </Button>
-        <Dialog {...args} open={open} onClose={() => setOpen(false)} />
-      </>
-    );
-  },
+  ...Template,
   args: {
-    actions: <Button onClick={() => alert('Cancel')}>Cancelar</Button>,
-    content: 'Este es un mensaje.',
+    ...Template.args,
+    content: 'Este es un mensaje de tamaño personalizado.',
     label: 'Close',
-    size: 'md',
-    title: 'Optional Size',
-    type: 'size',  
+    title: 'Size',
+    type: 'size',
   },
 };
