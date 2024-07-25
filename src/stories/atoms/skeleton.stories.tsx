@@ -1,7 +1,9 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { Skeleton, Typography } from '../../atoms';
-import { Avatar, Box } from '@mui/material';
+
+import { Avatar, Skeleton, Typography } from '../../atoms';
+
+import { Box } from '@mui/material';
 
 const meta = {
   title: 'Atoms/Skeleton',
@@ -58,7 +60,7 @@ export const TextVariant: Story = {
 
 export const CircularVariant: Story = {
   args: {
-    children: <Avatar />,
+    children: <Avatar type="profile">.</Avatar>,
     variant: 'circular',
     animation: 'pulse',
   },
@@ -105,10 +107,15 @@ export const FullComponentSkeleton: Story = {
           <Box sx={{ margin: 1 }}>
             {showSkeleton ? (
               <Skeleton {...args} variant="circular">
-                <Avatar />
+                <Avatar src="" alt="" />
               </Skeleton>
             ) : (
-              <Avatar src="https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg" />
+              <Avatar
+                height={60}
+                width={60}
+                alt="."
+                src="https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg"
+              />
             )}
           </Box>
           <Box sx={{ width: '100%' }}>
