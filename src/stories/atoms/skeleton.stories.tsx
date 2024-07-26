@@ -16,27 +16,42 @@ const meta = {
     animation: {
       control: 'select',
       options: ['pulse', 'wave', false],
-      description: 'Select an option from the control panel',
+      description: '**The animation type of the skeleton.**',
       table: {
+        category: 'Appearance',
         defaultValue: { summary: "'pulse'" },
       },
     },
     children: {
-      control: { disable: true },
+      control: 'text',
+      table: {
+        disable: true,
+      },
     },
     height: {
       control: 'number',
+      description: '**The height of the skeleton.**',
+      table: {
+        category: 'Dimensions',
+        type: { summary: 'string | number' },
+      },
     },
     variant: {
       control: 'select',
       options: ['text', 'circular', 'rectangular', 'rounded'],
-      description: 'Select an option from the control panel',
+      description: '**The type of content that will be rendered.**',
       table: {
+        category: 'Appearance',
         defaultValue: { summary: "'text'" },
       },
     },
     width: {
-      control: 'number',
+      control: 'text',
+      description: '**The width of the skeleton.**',
+      table: {
+        category: 'Dimensions',
+        type: { summary: 'string | number' },
+      },
     },
   },
   args: {
