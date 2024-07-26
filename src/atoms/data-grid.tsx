@@ -27,7 +27,7 @@ function DataGrid({ columns, rows, pageSize = 0, pageSizeOptions = [], ...other}
         {...other}
       />
     </div>
-  );
+  )
 }
 
 export default DataGrid;
