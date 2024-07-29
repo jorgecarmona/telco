@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
+
 import { DataGrid as MuiDataGrid, DataGridProps as MuiDataGridProps, GridColDef, GridPaginationModel} from '@mui/x-data-grid';
 
 interface DataGridProps extends Omit<MuiDataGridProps, 'columns' | 'rows'> {
@@ -9,13 +10,15 @@ interface DataGridProps extends Omit<MuiDataGridProps, 'columns' | 'rows'> {
 }
 
 function DataGrid({ columns, rows, pageSize = 0, pageSizeOptions = [], ...other}: DataGridProps) {
-  const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
+  const [paginationModel, setPaginationModel] = React.useState<GridPaginationModel>({
     pageSize: pageSize,
     page: 0,
   });
+
   const handlePaginationModelChange = (model: GridPaginationModel) => {
     setPaginationModel(model);
   };
+
   return (
     <div style={{ height: 600, width: '100%' }}>
       <MuiDataGrid 
