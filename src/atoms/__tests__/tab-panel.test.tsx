@@ -48,7 +48,6 @@ const tabs: TabConfig[] = [
     label: 'Item Three',
     value: 2,
     iconPosition: 'top',
-    icon: IconType.Help,
     tabHeight: '100px',
     tabWidth: '200px',
     component: (
