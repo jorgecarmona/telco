@@ -11,6 +11,7 @@ import Link from './link';
 import Password from './password';
 import Skeleton from './skeleton';
 import TextField from './text-field';
+import Snackbar from './snackbar';
 import Typography from './typography';
 
 export {
@@ -26,6 +27,7 @@ export {
   Link,
   Password,
   Skeleton,
+  Snackbar,
   TextField,
   Typography,
 };

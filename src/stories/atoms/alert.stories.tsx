@@ -2,10 +2,12 @@ import {Meta, StoryObj} from '@storybook/react';
 
 import Alert from '../../atoms/alert';
 import {action} from '@storybook/addon-actions';
+import { title } from 'process';
 
 type AlertProps = {
   severity: 'error' | 'info' | 'success' | 'warning';
   children: React.ReactNode;
+  title: ''
 };
 
 const meta: Meta<AlertProps> = {
@@ -30,6 +32,7 @@ export const Error = {
     severity: 'error',
     children: 'This is an error alert',
     onClose: action('onClose was called'),
+    title: '',
   },
 };
 
@@ -38,6 +41,7 @@ export const Info = {
     severity: 'info',
     children: 'This is an info alert',
     onClose: action('onClose was called'),
+    title: '',
   },
 };
 
@@ -46,6 +50,7 @@ export const Success = {
     severity: 'success',
     children: 'This is an success alert',
     onClose: action('onClose was called'),
+    title: '',
   },
 };
 
@@ -54,5 +59,6 @@ export const Warning = {
     severity: 'warning',
     children: 'This is an warning alert',
     onClose: action('onClose was called'),
+    title: '',
   },
 };

@@ -29,7 +29,7 @@ const meta = {
       },
     },
     height: {
-      control: 'number',
+      control: 'text',
       description: '**The height of the skeleton.**',
       table: {
         category: 'Dimensions',
