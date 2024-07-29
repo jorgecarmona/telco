@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react/';
 
-import TabPanel from '../../atoms/tab-panel';
+import { Tabs } from '../../atoms';
 import { IconType } from '../../atoms/icon-store';
 
-const meta: Meta<typeof TabPanel> = {
+const meta: Meta<typeof Tabs> = {
   args: {
     initialTabIndex: 0,
     orientation: 'horizontal',
@@ -25,17 +25,17 @@ const meta: Meta<typeof TabPanel> = {
     },
     tabs: { table: { disable: true } },
   },
-  component: TabPanel,
+  component: Tabs,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: 'Atoms/TabPanel',
+  title: 'Atoms/Tabs',
 };
 
 export default meta;
 
-type Story = StoryObj<typeof TabPanel>;
+type Story = StoryObj<typeof Tabs>;
 
 export const DefaultTabs: Story = {
   args: {

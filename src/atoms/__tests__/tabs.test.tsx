@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import CircularProgress from '@mui/material/CircularProgress'; 
 
 import { IconType } from '../icon-store';
-import TabPanel, {TabConfig} from '../tab-panel';
+import Tabs, {TabConfig} from '../tabs';
 
 const myfunction = () => {
   console.log('Se llamó la función');
@@ -60,6 +60,6 @@ const tabs: TabConfig[] = [
 
 describe('TabPanel Component', () => {
   it('renders with default properties', () => {
-    render(<TabPanel tabs={tabs} scrollOnTabLength={2} initialTabIndex={2}/>)
+    render(<Tabs tabs={tabs} scrollOnTabLength={2} initialTabIndex={2}/>)
   });
 });
