@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { DataGrid as MuiDataGrid, DataGridProps as MuiDataGridProps, GridColDef, GridFilterModel} from '@mui/x-data-grid';
 
 interface DataGridProps extends Omit<MuiDataGridProps, 'columns' | 'rows'> {
@@ -8,16 +9,16 @@ interface DataGridProps extends Omit<MuiDataGridProps, 'columns' | 'rows'> {
   rows: Record<string, unknown>[];
 }
 
-function DataGrid({ columns, rows, disableColumnFilter, filterModel, ...other}: DataGridProps) {
+function DataGrid({columns, disableColumnFilter, filterModel, rows, ...props}: DataGridProps) {
 
   return (
     <div style={{ height: 600, width: '100%' }}>
       <MuiDataGrid 
-        rows={rows} 
         columns={columns} 
         disableColumnFilter={disableColumnFilter}
         filterModel={filterModel}
-        {...other}
+        rows={rows} 
+        {...props}
       />
     </div>
   );
