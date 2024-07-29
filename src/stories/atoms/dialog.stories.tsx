@@ -33,7 +33,7 @@ const Template: Story = {
     );
   },
   args: {
-    actions: '',
+    footer: '',
     content: '',
   },
 };
@@ -43,6 +43,8 @@ export const AlertDialog: Story = {
   args: {
     ...Template.args,
     content: '',
+    footer: '',
+    header: '',
   },
 };
 
@@ -51,7 +53,8 @@ export const FormDialog: Story = {
   args: {
     ...Template.args,
     content: '',
-    actions: '',
+    footer: '',
+    header: '',
   },
 };
 
@@ -60,5 +63,7 @@ export const SizeDialog: Story = {
   args: {
     ...Template.args,
     content: '',
+    footer: '',
+    header: '',
   },
 };
