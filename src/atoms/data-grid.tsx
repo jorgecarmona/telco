@@ -24,9 +24,7 @@ function DataGrid({
   const [sortModel, setSortModel] = useState<GridSortModel>([]);
 
   const handleSortModelChange = (model: GridSortModel) => {
-    if (!disableColumnSorting) {
-      setSortModel(model);
-    }
+    setSortModel(model);
   };
 
   return (
