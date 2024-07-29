@@ -1,19 +1,23 @@
 import React from 'react';
 
-import { Dialog as MuiDialog, DialogActions, DialogContent, DialogProps as MuiDialogProps } from '@mui/material';
+import { Dialog as MuiDialog, DialogActions, DialogContent as MuiDialogContent, DialogProps as MuiDialogProps, DialogTitle as MuiDialogTitle } from '@mui/material';
 
 interface DialogProps extends Omit<MuiDialogProps, 'content'> {
-  actions?: React.ReactNode;
-  content: React.ReactNode;
+  footer?: React.ReactNode;
+  content?: React.ReactNode;
+  header?: React.ReactNode | string;
 }
 
-function Dialog ({ actions, content, ...props }: DialogProps) {
+function Dialog ({ footer, content, header, ...props }: DialogProps) {
   return (
     <MuiDialog {...props}>
-      <DialogContent>
+      <MuiDialogTitle id="alert-dialog-title">
+        {header}
+      </MuiDialogTitle>
+      <MuiDialogContent>
         {content}
-      </DialogContent>
-      {actions && <DialogActions>{actions}</DialogActions>}
+      </MuiDialogContent>
+      {footer && <DialogActions>{footer}</DialogActions>}
     </MuiDialog>
   );
 }
