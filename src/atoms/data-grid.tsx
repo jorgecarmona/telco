@@ -1,26 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { DataGrid as MuiDataGrid, DataGridProps as MuiDataGridProps, GridColDef, GridFilterModel} from '@mui/x-data-grid';
+import {
+  DataGrid as MuiDataGrid,
+  DataGridProps as MuiDataGridProps,
+  GridSortModel,
+  GridColDef,
+} from '@mui/x-data-grid';
+import { Box } from '@mui/material';
 
 interface DataGridProps extends Omit<MuiDataGridProps, 'columns' | 'rows'> {
+  checkboxSelection?: boolean;
   columns: GridColDef[];
-  disableColumnFilter: boolean;
-  filterModel?: GridFilterModel;
+  disableColumnSorting?: boolean;
   rows: Record<string, unknown>[];
 }
 
-function DataGrid({columns, disableColumnFilter, filterModel, rows, ...props}: DataGridProps) {
+function DataGrid({
+  checkboxSelection = false,
+  columns,
+  disableColumnSorting = false,
+  rows,
+  ...other
+}: DataGridProps) {
+  const [sortModel, setSortModel] = useState<GridSortModel>([]);
+
+  const handleSortModelChange = (model: GridSortModel) => {
+    setSortModel(model);
+  };
 
   return (
-    <div style={{ height: 600, width: '100%' }}>
-      <MuiDataGrid 
-        columns={columns} 
-        disableColumnFilter={disableColumnFilter}
-        filterModel={filterModel}
-        rows={rows} 
-        {...props}
+    <Box sx={{ height: 700, width: '100%' }}>
+      <MuiDataGrid
+        checkboxSelection={checkboxSelection}
+        columns={columns.map((col) => ({
+          ...col,
+          sortable: !disableColumnSorting,
+        }))}
+        onSortModelChange={handleSortModelChange}
+        rows={rows}
+        sortModel={sortModel}
+        {...other}
       />
-    </div>
+    </Box>
   );
 }
 
