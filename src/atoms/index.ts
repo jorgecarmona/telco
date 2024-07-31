@@ -5,14 +5,11 @@ import BreadCrumbs from './breadcrumbs';
 import Button from './button';
 import Card from './card';
 import Chip from './chip';
-import Dialog from './dialog';
 import Grid from './grid';
 import Icon from './icon';
 import Link from './link';
 import Password from './password';
-import Skeleton from './skeleton';
 import TextField from './text-field';
-import Snackbar from './snackbar';
 import Typography from './typography';
 
 export {
@@ -23,13 +20,10 @@ export {
   Button,
   Card,
   Chip,
-  Dialog,
   Grid,
   Icon,
   Link,
   Password,
-  Skeleton,
-  Snackbar,
   TextField,
   Typography,
 };
