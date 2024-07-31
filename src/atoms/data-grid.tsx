@@ -5,6 +5,7 @@ import {
   GridSortModel,
   GridColDef,
 } from '@mui/x-data-grid';
+
 import { Box } from '@mui/material';
 
 interface DataGridProps extends Omit<MuiDataGridProps, 'columns' | 'rows'> {
