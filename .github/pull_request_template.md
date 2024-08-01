@@ -34,7 +34,7 @@ If applicable, add screenshots to help explain your changes.
 
 ## Checklist:
 
-- [ ] My code follows the style guidelines of this project
+- [ ] My code follows the [UI Coding Guidelines](https://docs.google.com/document/d/1prF4Oh72WARlM1lU7I0uVwZ-ruSkdHuJ39HtGUmtEm8/edit?usp=sharing) of this project
 - [ ] I have performed a self-review of my code
 - [ ] I have commented on my code, particularly in hard-to-understand areas
 - [ ] I have made corresponding changes to the documentation
