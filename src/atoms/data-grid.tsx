@@ -8,7 +8,7 @@ interface DataGridProps extends Omit<MuiDataGridProps, 'columns' | 'rows'> {
     disableColumnSorting: boolean;
     filterModel?: GridFilterModel;
     rows: Record<string, unknown>[];
-    pageSize?: number;
+    pageSize: number;
     pageSizeOptions?: number[];
 }
 
@@ -28,7 +28,7 @@ function DataGrid({ columns, rows, disableColumnFilter, disableColumnSorting, fi
     };
 
     return (
-        <div style={{ height: 600, width: '100%' }}>
+        <div style={{ width: '100%' }}>
             <MuiDataGrid 
                 rows={rows} 
                 columns={columns} 

@@ -8,57 +8,65 @@ const meta: Meta<typeof DataGrid> = {
     title: 'Atoms/DataGrid',
     component: DataGrid,
     parameters: {
-        layout: 'centered',
+      layout: 'centered',
     },
     tags: ['autodocs'],
     argTypes: {
-        disableColumnFilter: { control: 'boolean' },
-        columns: { table: { disable: true } },
-        rows: { table: { disable: true } },
-        filterModel: { table: { disable: true } },
+      disableColumnFilter: { control: 'boolean' },
+      columns: { table: { disable: true } },
+      rows: { table: { disable: true } },
+      filterModel: { table: { disable: true } },
     },
-} satisfies Meta<typeof DataGrid>;
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
     args: {
-    columns: [
+      pageSize: 5,
+      pageSizeOptions: [5, 10, 20],
+    },
+  } satisfies Meta<typeof DataGrid>;
+  
+  export default meta;
+  
+  type Story = StoryObj<typeof meta>;
+  
+  export const Default: Story = {
+    args: {
+      columns: [
         { field: 'id', headerName: 'ID', width: 90 },
         { field: 'firstName', headerName: 'First name', width: 150 },
         { field: 'lastName', headerName: 'Last name', width: 150 },
         { field: 'age', headerName: 'Age', type: 'number', width: 110 },
-    ] as GridColDef[],
-    rows: [
+      ] as GridColDef[],
+      rows: [
         { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
         { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
         { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
         { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    ],
-    disableColumnFilter: false,
-    filterModel: { items: [] },
+      ],
+      disableColumnFilter: false,
+      filterModel: { items: [] },
+      pageSize: 5,
+      pageSizeOptions: [5, 10, 20],
     },
-};
-
-export const WithoutFilter: Story = {
+  };
+  
+  export const WithoutFilter: Story = {
     args: {
-        ...Default.args,
-        disableColumnFilter: true,
+      ...Default.args,
+      disableColumnFilter: true,
     },
-};
-
-export const Empty: Story = {
+  };
+  
+  export const Empty: Story = {
     args: {
-    columns: [
+      columns: [
         { field: 'id', headerName: 'ID', width: 90 },
         { field: 'firstName', headerName: 'First name', width: 150 },
         { field: 'lastName', headerName: 'Last name', width: 150 },
         { field: 'age', headerName: 'Age', type: 'number', width: 110 },
-    ] as GridColDef[],
-    rows: [],
-    disableColumnFilter: false,
-    filterModel: { items: [] },
-    }
-};
+      ] as GridColDef[],
+      rows: [],
+      disableColumnFilter: false,
+      filterModel: { items: [] },
+      pageSize: 5,
+      pageSizeOptions: [5, 10, 20],
+    },
+  };
