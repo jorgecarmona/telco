@@ -12,7 +12,11 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint', 'import'],
-  rules: {},
+  rules: {
+    'import/no-named-as-default-member': 'off', // Disable the rule globally
+    '@typescript-eslint/no-explicit-any': 'off', // Example of other rules
+    // Other rules as needed
+  },
   settings: {
     'import/resolver': {
       typescript: {
