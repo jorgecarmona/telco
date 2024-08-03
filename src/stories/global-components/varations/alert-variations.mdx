@@ -1,0 +1,99 @@
+import { Meta } from '@storybook/addon-docs';
+
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+
+import { Alert } from "../../../atoms";
+
+<Meta title="Global Components/Alert/Variations" component={Alert} />
+
+<div className='container'>
+    # Alert Variantions
+
+    This document provides examples of different variations of the `Alert` component.
+
+    [**> Succes Alert**](#succes-alert)
+
+    [**> Error Alert**](#error-alert)
+
+    [**> Warning Alert**](#warning-alert)
+
+    [**> Information Alert**](#information-alert)
+
+
+    ## Success Alert
+
+    The **Success Alert** is used to convey positive feedback or successful completion of an action. It typically indicates that an operation was successful, such as saving data or completing a task. 
+    This alert type is styled with a green color to signify success and is often accompanied by a checkmark icon.
+
+    <Alert severity="success" title="Operation Successful" onClose={() => console.log('Alert closed')}>
+        The operation was completed successfully.
+    </Alert>
+
+    ## Error Alert
+
+    The **Error Alert** is used to notify users about a problem or failure that occurred during an operation. This alert type is styled with a red color to signify an error or critical issue and is often accompanied by an error icon. 
+    It should be used to indicate problems that require immediate attention or correction.
+
+    <Alert severity="error" title="Error" onClose={() => console.log('Alert closed')}>
+        An error occurred while processing the request.
+    </Alert>
+
+    ## Warning Alert
+
+    The **Warning Alert** is used to highlight potential issues or cautionary information. It typically signifies that the user should be aware of something that could lead to a problem or requires careful consideration. 
+    This alert type is styled with a yellow or orange color to signify caution and is often accompanied by a warning icon.
+
+    <Alert severity="warning" onClose={() => console.log('Alert closed')}>
+        This is an important warning.
+    </Alert>
+
+    ## Information Alert
+
+    The **Information Alert** is used to provide additional information or context to the user. 
+    It is typically used for messages that do not require immediate action but are important for the user's understanding or awareness. This alert type is styled with a blue color to signify informational content and is often accompanied by an information icon.
+
+    <Alert severity="info" title="Information">
+        Here is the additional information you need.
+    </Alert>
+
+    ## Available props
+
+    <TableContainer component={Paper}>
+        <Table>
+            <TableHead>
+                <TableRow>
+                    <TableCell>Prop</TableCell>
+                    <TableCell>Type</TableCell>
+                    <TableCell>Description</TableCell>
+                    <TableCell>Default</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
+                <TableRow>
+                    <TableCell>severity</TableCell>
+                    <TableCell>'error' | 'info' | 'success' | 'warning'</TableCell>
+                    <TableCell>The type of alert that determines the color and style of the message.</TableCell>
+                    <TableCell>-</TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell>title</TableCell>
+                    <TableCell>string</TableCell>
+                    <TableCell>The title of the alert message. If not provided, a default title is used based on the alert type.</TableCell>
+                    <TableCell>-</TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell>onClose</TableCell>
+                    <TableCell>() => void</TableCell>
+                    <TableCell>Function called when the user closes the alert.</TableCell>
+                    <TableCell>-</TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell>children</TableCell>
+                    <TableCell>React.ReactNode</TableCell>
+                    <TableCell>Content of the alert message.</TableCell>
+                    <TableCell>-</TableCell>
+                </TableRow>
+            </TableBody>
+        </Table>
+    </TableContainer>
+</div>

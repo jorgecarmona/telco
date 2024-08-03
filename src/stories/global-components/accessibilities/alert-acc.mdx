@@ -1,0 +1,14 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Global Components/Alert/Accessibility" />
+
+# Alert Component Accessibility
+
+Here are some factors to consider to ensure that your Alert is accessible:
+
+* Because alerts are not intended to interfere with the use of the app, your Alert component should never affect the keyboard focus.
+* If an alert contains an action, that action must have a tabindex of 0 so it can be reached by keyboard-only users.
+* Essential alerts should not disappear automatically—timed interactions can make your app inaccessible to users who need extra time to understand or locate the alert.
+* Alerts that occur too frequently can inhibit the usability of your app.
+* Dynamically rendered alerts are announced by screen readers; alerts that are already present on the page when it loads are not announced.
+* Color does not add meaning to the UI for users who require assistive technology. You must ensure that any information conveyed through color is also denoted in other ways, such as within the text of the alert itself, or with additional hidden text that's read by screen readers.

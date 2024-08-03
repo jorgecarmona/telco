@@ -1,0 +1,52 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Alert } from '../../../atoms';
+import { Error, Info, Success, Warning } from '../../atoms/alert.stories';
+
+<Meta title="Global Components/Alert/Overview" component={Alert} />
+
+# Alert
+
+The `Alert` component displays alert messages in the user interface. This component is configurable and can display different types of alerts, such as errors, warnings, information, or success.
+
+## Example
+
+<Canvas>
+  <Story name="Error Alert" args={{ severity: 'error', children: 'This is an error alert' }} />
+</Canvas>
+
+<Canvas>
+  <Story name="Info Alert" args={{ severity: 'info', children: 'This is an info alert' }} />
+</Canvas>
+
+<Canvas>
+  <Story name="Success Alert" args={{ severity: 'success', children: 'This is a success alert' }} />
+</Canvas>
+
+<Canvas>
+  <Story name="Warning Alert" args={{ severity: 'warning', children: 'This is a warning alert' }} />
+</Canvas>
+
+## Usage Guidelines
+
+A key trait of the alert pattern is that it should not interrupt the user's experience of the app. Alerts should not be confused with alert dialogs, which are intended to interrupt the user to obtain a response.
+
+- **Appropriate Use**: Use the `Alert` component to provide important feedback to the user. Each type of alert (`error`, `info`, `success`, `warning`) should be used appropriately according to the severity of the message.
+- **Clarity**: Ensure that the alert message is clear and concise. Avoid overly verbose messages that might confuse the user.
+- **Accessibility**: Make sure that alerts are accessible to all users, including those using screen readers. The `title` prop is particularly important for conveying the alert type and message.
+- **Dismissal**: Allow users to dismiss alerts if appropriate, using the `onClose` prop. Alerts that are less critical should provide an option to be dismissed or hidden after a certain period.
+
+### Best Practices
+
+- **Consistency**: Maintain consistency in the use of alert types across your application. This helps users quickly understand the nature of the alert and how to respond.
+- **Avoid Overuse**: Use alerts sparingly. Overusing alerts can overwhelm users and detract from their effectiveness.
+- **Testing**: Test alerts thoroughly to ensure they appear as expected and provide the correct feedback. Verify that the alerts behave correctly across different screen sizes and devices.
+- **Design Integration**: Ensure that the `Alert` component integrates well with your application's design and theme. Custom styles and themes should be tested to ensure they match your brand guidelines.
+
+### Use Cases
+
+- Form Submission Confirmation
+- Form Validation Error
+- Important Warning
+- Information Update
+- Success Notification with Dismissal
+- Onboarding Guidance
