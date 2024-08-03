@@ -1,0 +1,38 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Brand Identity/Font" />
+
+# Fonts
+
+For most purposes, we write text in [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans). 
+We use Normal (400 weight) for headers and titles, and Light (300 weight) for ordinary body text. 
+When we need to display source code or shell commands, we use IBM Plex Mono Normal (weight = same as surrounding text). 
+This font family is [free](https://fonts.google.com/specimen/IBM+Plex+Sans/about?query=ibm+plex+sans), 
+supports everything from Unicode that we are likely to care about, and is available 
+in various permutations, widths, and weights. [You can download it from our Google Drive brand folder](https://drive.google.com/file/d/1kC5ze7wuRNUWS5rxF_DgRNym6RkQpgSY/view?usp=sharing) 
+or from Google Fonts, and it can be embedded as a resource in an iOS app. It is referenceable in HTML with:
+
+#### Using `<style>`
+
+```html
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap');
+</style>
+```
+#### Or:
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+```
+
+---
+#### To reference these fonts in CSS:
+```html
+font-family: 'IBM Plex Mono', monospace;
+font-family: 'IBM Plex Sans', sans-serif;
+```
+For labels and captions (e.g., on diagrams), we sometimes use [Barlow Condensed](https://fonts.google.com/specimen/Barlow+Condensed). 
+This allows us to fit more words on a single line while remaining highly legible, and offers a nice stylistic change.
+
+
