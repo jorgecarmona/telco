@@ -3,7 +3,7 @@ import {action} from '@storybook/addon-actions';
 import BreadCrumbs from '../../atoms/breadcrumbs';
 
 const meta = {
-  title: 'Atoms/Breadcrumbs',
+  title: 'Global Components/Breadcrumbs/All Stories',
   component: BreadCrumbs,
   parameters: {
     layout: 'centered',

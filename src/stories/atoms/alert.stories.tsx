@@ -1,8 +1,11 @@
-import {Meta, StoryObj} from '@storybook/react';
+import {Meta} from '@storybook/react';
+import {action} from '@storybook/addon-actions';
+
+import { ThemeProvider } from '@emotion/react';
+
+import theme from '../../theme/theme';
 
 import Alert from '../../atoms/alert';
-import {action} from '@storybook/addon-actions';
-import { title } from 'process';
 
 type AlertProps = {
   severity: 'error' | 'info' | 'success' | 'warning';
@@ -11,8 +14,9 @@ type AlertProps = {
 };
 
 const meta: Meta<AlertProps> = {
-  title: 'Atoms/Alert',
+  title: 'Global Components/Alert/All Stories',
   component: Alert,
+  decorators: [(Story) => <ThemeProvider theme={theme}><Story /></ThemeProvider>],
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',

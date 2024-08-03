@@ -4,7 +4,7 @@ import {Meta, StoryObj} from '@storybook/react';
 import { Button, Snackbar } from '../../atoms';
 
 const meta = {
-    title: 'Atoms/Snackbar',
+    title: 'Global Components/Snackbar/All Stories',
     component: Snackbar,
     parameters: {
         layout: 'centered',

@@ -14,7 +14,7 @@ const imageOptions = {
 };
 
 const meta = {
-  title: 'Atoms/Avatar',
+  title: 'Global Components/Avatar/All Stories',
   component: Avatar,
   tags: ['autodocs'],
   parameters: {

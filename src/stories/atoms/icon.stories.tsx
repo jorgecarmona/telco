@@ -3,7 +3,7 @@ import {Icon} from '../../atoms';
 import {IconType} from '../../atoms/icon-store';
 
 export default {
-  title: 'Atoms/Icon',
+  title: 'Global Components/Icon/All Stories',
   component: Icon,
   tags: ['autodocs'],
   parameters: {

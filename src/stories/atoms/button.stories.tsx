@@ -8,7 +8,7 @@ import {ButtonType} from '../../atoms/button';
 import {IconType} from '../../atoms/icon-store';
 
 const meta = {
-  title: 'Atoms/Button',
+  title: 'Global Components/Button/All Stories',
   component: Button,
   parameters: {
     layout: 'centered',

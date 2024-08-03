@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import { Dialog } from '../../atoms';
 
 const meta: Meta<typeof Dialog> = {
-  title: 'Atoms/Dialog',
+  title: 'Global Components/Dialog/All Stories',
   component: Dialog,
   parameters: {
     layout: 'centered',
