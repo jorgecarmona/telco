@@ -1,30 +1,40 @@
-import { ChangeEvent } from 'react';
+import React from 'react';
 
-import { TextField as MuiTextField, InputAdornment, InputLabel, TextFieldProps as MuiTextFieldProps } from '@mui/material';
+import {
+  TextField as MuiTextField,
+  InputAdornment,
+  InputLabel,
+  TextFieldProps as MuiTextFieldProps,
+} from '@mui/material';
+
 import { iconLookup } from './icon-store';
 
 import './styles/app.css';
 
-export interface TextFieldProps extends Omit<MuiTextFieldProps, 'onChange' | 'InputProps'> {
+export interface TextFieldProps
+  extends Omit<MuiTextFieldProps, 'onChange' | 'InputProps'> {
   icon?: boolean;
   id: string;
   label: string;
-  name: string
-  onChangeTextField: (e: ChangeEvent<HTMLInputElement>) => void;
+  name: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   readOnly?: boolean;
   InputProps?: MuiTextFieldProps['InputProps'];
 }
 
-function TextField({
-  icon,
-  id,
-  label,
-  name,
-  onChangeTextField,
-  readOnly,
-  InputProps,
-  ...others
-}: TextFieldProps) {
+function CustomTextField(
+  {
+    icon,
+    id,
+    label,
+    name,
+    onChange,
+    readOnly,
+    InputProps,
+    ...others
+  }: TextFieldProps,
+  ref: React.Ref<HTMLInputElement>,
+) {
   const renderEmailIcon = () => {
     if (icon) {
       return (
@@ -35,8 +45,6 @@ function TextField({
     }
     return null;
   };
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => onChangeTextField(e);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -52,17 +60,22 @@ function TextField({
         disabled={readOnly}
         id={id}
         name={name}
-        onChange={handleChange}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onChange ? onChange(e) : null
+        }
         InputProps={{
           startAdornment: renderEmailIcon(),
           ...InputProps,
         }}
         style={{ backgroundColor: readOnly ? '#eeeeee' : 'transparent' }}
-        size='small'
+        size="small"
+        ref={ref}
         {...others}
       />
     </div>
   );
 }
+
+const TextField = React.forwardRef(CustomTextField);
 
 export default TextField;

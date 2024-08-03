@@ -1,40 +1,37 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 
-import TextField from './text-field';
+import { TextField } from '../atoms';
 import { TextFieldProps } from './text-field';
-
-import { IconButton, InputAdornment, InputLabel } from '@mui/material';
 import { iconLookup } from './icon-store';
 
-interface PasswordProps extends Omit<TextFieldProps, 'onChangeTextField' | 'required'> {
-  onChangeCallback: (value: string) => void;
+import { IconButton, InputAdornment, InputLabel } from '@mui/material';
+
+interface PasswordProps extends Omit<TextFieldProps, 'onChange' | 'required'> {
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   errorHelperText?: string;
   icon?: boolean;
-  value: string;
   required?: boolean;
   label: string;
 }
 
-function Password({
-  fullWidth = false,
-  onChangeCallback,
-  helperText,
-  error,
-  errorHelperText,
-  icon,
-  required,
-  value,
-  label,
-  ...others
-}: PasswordProps) {
+function CustomPassword(
+  {
+    fullWidth = false,
+    onChange,
+    helperText,
+    error,
+    errorHelperText,
+    icon,
+    required,
+    label,
+    ...others
+  }: PasswordProps,
+  ref: React.Ref<HTMLInputElement>,
+) {
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
-  };
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChangeCallback(e.target.value);
   };
 
   const renderPasswordIcon = () => {
@@ -46,7 +43,11 @@ function Password({
             onClick={handleClickShowPassword}
             edge="end"
           >
-            {showPassword ? <iconLookup.visibilityoff /> : <iconLookup.visibility />}
+            {showPassword ? (
+              <iconLookup.visibilityoff />
+            ) : (
+              <iconLookup.visibility />
+            )}
           </IconButton>
         </InputAdornment>
       );
@@ -54,30 +55,34 @@ function Password({
     return null;
   };
 
-  const newHelperText = error ? errorHelperText : helperText;
+  // const newHelperText = error ? errorHelperText : helperText;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <InputLabel htmlFor="Password" />
+      <InputLabel htmlFor={others.id} />
       <TextField
         {...others}
         error={Boolean(error)}
         fullWidth={fullWidth}
-        helperText={newHelperText}
-        id="Password"
+        helperText={helperText}
+        id={others.id}
         InputProps={{
           endAdornment: renderPasswordIcon(),
         }}
         label={label}
-        name='Password'
-        onChangeTextField={handleChange}
+        name={others.name}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onChange ? onChange(e) : null
+        }
         required={required}
         size="small"
         type={showPassword ? 'text' : 'password'}
-        value={value}
+        ref={ref}
       />
     </div>
   );
 }
+
+const Password = React.forwardRef(CustomPassword);
 
 export default Password;

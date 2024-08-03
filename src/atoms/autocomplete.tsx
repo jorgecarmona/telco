@@ -1,8 +1,5 @@
-import React, {ChangeEvent} from 'react';
-import {
-  Autocomplete as MuiAutocomplete,
-  InputLabel
-} from '@mui/material';
+import React, { ChangeEvent } from 'react';
+import { Autocomplete as MuiAutocomplete, InputLabel } from '@mui/material';
 
 import TextField from './text-field';
 
@@ -22,32 +19,38 @@ interface AutocompleteProps {
   options: OptionType[];
   required?: boolean;
   value: string;
-  onChangeCallback: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-function Autocomplete({
-  id,
-  name,
-  error,
-  errorHelperText,
-  helperText,
-  label,
-  options,
-  required,
-  value,
-  onChangeCallback,
-}: AutocompleteProps) {
+
+function CustomAutocomplete(
+  {
+    id,
+    name,
+    error,
+    errorHelperText,
+    helperText,
+    label,
+    options,
+    required,
+    value,
+    onChange,
+  }: AutocompleteProps,
+  ref: React.Ref<HTMLInputElement>,
+) {
   const [inputValue, setInputValue] = React.useState(value);
+
   let newHelperText = helperText;
+
   if (error) {
     newHelperText = errorHelperText;
   }
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChangeCallback(e);
-  };
+  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   onChangeCallback(e);
+  // };
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       <InputLabel
         htmlFor="AutoComplete"
         className={required ? 'required-field' : undefined}
@@ -63,16 +66,18 @@ function Autocomplete({
           setInputValue(newInputValue);
         }}
         renderInput={(params) => (
-          <div style={{width: '300px'}}>
+          <div style={{ width: '300px' }}>
             <TextField
               {...params}
-              label=''
+              label=""
               id={id}
               name={name}
               helperText={newHelperText}
               error={Boolean(error)}
               variant="outlined"
-              onChangeTextField={handleChange}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                onChange ? onChange(e) : null
+              }
             />
           </div>
         )}
@@ -80,5 +85,7 @@ function Autocomplete({
     </div>
   );
 }
+
+const Autocomplete = React.forwardRef(CustomAutocomplete);
 
 export default Autocomplete;

@@ -13,7 +13,7 @@ const meta: Meta<typeof TextField> = {
     name: { table: { disable: true } },
     type: { table: { disable: true } },
     InputProps: { table: { disable: true } },
-    onChangeTextField: { table: { disable: true }},
+    onChange: { table: { disable: true } },
   },
   args: {
     error: false,
@@ -23,7 +23,7 @@ const meta: Meta<typeof TextField> = {
     icon: false,
     label: '',
     name: '',
-    onChangeTextField: (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
       console.log('TextField entered:', e.target.value);
     },
     placeholder: '',
@@ -42,7 +42,7 @@ export const Default: Story = {
     label: 'Name',
     value: 'Massachusetts Paid Family & Medical Leave',
     fullWidth: true,
-    onChangeTextField: (e) => {
+    onChange: (e) => {
       console.log('TextField entered:', e.target.value);
     },
     id: '123',
@@ -56,7 +56,7 @@ export const IconTextField: Story = {
     label: 'Code',
     name: 'text-field',
     icon: true,
-    onChangeTextField: (e) => {
+    onChange: (e) => {
       console.log('TextField entered:', e.target.value);
     },
     readOnly: true,
@@ -71,7 +71,7 @@ export const ReadOnlyTextField: Story = {
     name: 'text-field',
     readOnly: true,
     value: 'PF-ML',
-    onChangeTextField: (e) => {
+    onChange: (e) => {
       console.log('TextField entered:', e.target.value);
     },
   },
@@ -85,7 +85,7 @@ export const ErrorsTextField: Story = {
     label: 'Name',
     required: true,
     name: 'text-field',
-    onChangeTextField: (e) => {
+    onChange: (e) => {
       console.log('TextField entered:', e.target.value);
     },
     value: '',

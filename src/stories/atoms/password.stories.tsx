@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import Password from '../../atoms/password';
 
@@ -16,16 +16,15 @@ const meta = {
     helperText: '',
     icon: true,
     label: '',
-    onChangeCallback: (value: string) => {
-      console.log('password entered:', value);
-    },
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+      console.log('password entered:', e.target.value),
     required: true,
     value: '',
   },
   argTypes: {
     id: { table: { disable: true } },
     name: { table: { disable: true } },
-    onChangeCallback: { table: { disable: true } },
+    onChange: { table: { disable: true } },
   },
 } satisfies Meta<typeof Password>;
 
@@ -40,7 +39,7 @@ export const Default: Story = {
     id: 'Password',
     label: 'Password',
     name: 'Password',
-    onChangeCallback: (value) => {
+    onChange: (value) => {
       console.log('Password entered:', value);
     },
     required: false,
@@ -56,7 +55,7 @@ export const WithError: Story = {
     id: 'Password',
     label: 'Password',
     name: 'Password',
-    onChangeCallback: (value) => {
+    onChange: (value) => {
       console.log('Password entered:', value);
     },
     required: true,
@@ -70,7 +69,7 @@ export const WithIcon: Story = {
     id: 'Password',
     label: 'Password',
     name: 'Password',
-    onChangeCallback: (value) => {
+    onChange: (value) => {
       console.log('Password entered:', value);
     },
     value: '1234567',
