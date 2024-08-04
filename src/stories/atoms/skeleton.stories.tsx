@@ -6,7 +6,7 @@ import { Avatar, Skeleton, Typography } from '../../atoms';
 import { Box } from '@mui/material';
 
 const meta = {
-  title: 'Atoms/Skeleton',
+  title: 'Global Components/Skeleton/All Stories',
   component: Skeleton,
   parameters: {
     layout: 'centered',

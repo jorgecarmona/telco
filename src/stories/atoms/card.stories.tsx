@@ -4,7 +4,7 @@ import {iconLookup} from '../../atoms/icon-store';
 import {CardHeader, IconButton} from '@mui/material';
 
 const meta = {
-  title: 'Atoms/Card',
+  title: 'Global Components/Card/All Stories',
   component: Card,
   parameters: {
     layout: 'centered',

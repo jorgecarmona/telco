@@ -1,0 +1,28 @@
+import { Meta } from '@storybook/blocks';
+
+import telcoTheme from "../../theme/theme";
+
+import coreColors from '../assets/core-colors.png';
+
+import '../../index.css'
+
+<Meta title="Brand Identity/Colors" />
+
+<div className='container'>
+    # Core Colors
+
+    Our company uses <span style={{color: telcoTheme.palette.primary.main}}>provenant blue</span> (#014db5) as a primary brand color. 
+    Important grays are provenant charcoal (#434343, the color of this text) and <span style={{color: telcoTheme.palette.secondary.main}}>provenant gray</span> (#cccccc). 
+    When Provenant Blue renders at 50% transparency on white (as in the watermark in the header of this doc, it becomes #82a8db.
+
+    <div style={{ textAlign: 'center' }}>
+        <img src={coreColors} alt="Core Colors" width="190"/>
+    </div>
+
+    Overusing the blue could give a cartoonish effect, so we avoid filling large background regions with it. 
+    We prefer to use neutral canvases that are built from whites and grays according to the light or dark theme that's active. 
+    Sometimes we use a faint, translucent wash of our blue over pure white or pure black backgrounds to add chroma and interest; 
+    see our [slide deck template](https://docs.google.com/presentation/d/1kV7ceCicEBFrdWtwwsc4KSOZZD7UTgNWP-IISIydCGw/edit) for examples.
+
+    More details about color appear [below](https://docs.google.com/document/d/1MNWCXOWrcmT5yCOh-6IKAxx6_oU4e1sY86nXrK5iHVo/edit#heading=h.1l8oacbv5hdw).
+</div>

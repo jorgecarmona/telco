@@ -3,7 +3,7 @@ import type {Meta, StoryObj} from '@storybook/react';
 import {Typography} from '../../atoms';
 
 const meta = {
-  title: 'Atoms/Typography',
+  title: 'Global Components/Typography/All Stories',
   component: Typography,
   parameters: {
     layout: 'centered',

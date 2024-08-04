@@ -4,7 +4,7 @@ import {fn} from '@storybook/test';
 import Chip from '../../atoms/chip';
 
 const meta: Meta = {
-  title: 'Atoms/Chip',
+  title: 'Global Components/Chip/All Stories',
   component: Chip,
   parameters: {
     layout: 'centered',

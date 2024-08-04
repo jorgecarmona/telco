@@ -3,7 +3,7 @@ import {Autocomplete} from '../../atoms';
 
 type Story = StoryObj<typeof Autocomplete>;
 export default {
-  title: 'Atoms/Autocomplete',
+  title: 'Global Components/Auto Complete/All Stories',
   component: Autocomplete,
   parameters: {
     layout: 'centered',

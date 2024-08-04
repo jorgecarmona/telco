@@ -3,7 +3,7 @@ import {Meta, StoryObj} from '@storybook/react';
 import Password from '../../atoms/password';
 
 const meta = {
-  title: 'Atoms/Password',
+  title: 'Global Components/Password/All Stories',
   component: Password,
   parameters: {
     layout: 'centered',
