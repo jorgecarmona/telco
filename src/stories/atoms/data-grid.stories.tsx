@@ -17,7 +17,12 @@ const meta: Meta<typeof DataGrid> = {
     disableColumnSorting: { control: 'boolean' },
     filterModel: { table: { disable: true } },
     rows: { table: { disable: true } },
-    sortModel: { control: 'object' },
+    sortModel: { table: { disable: true } },
+  },
+  args: {
+    pageSize: 5,
+    pageSizeOptions: [5, 10, 20],
+    checkboxSelection: false
   },
 } satisfies Meta<typeof DataGrid>;
 
@@ -33,18 +38,23 @@ export const Default: Story = {
       { field: 'lastName', headerName: 'Last name', width: 150 },
       { field: 'age', headerName: 'Age', type: 'number', width: 110 },
     ] as GridColDef[],
-    disableColumnFilter: false,
-    disableColumnSorting: false,
-    filterModel: { items: [] },
-    sortModel: [{ field: 'firstName', sort: 'asc' }],
     rows: [
       { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
       { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
       { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
       { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+      { id: 5, lastName: 'Garcia', firstName: 'Alejandra', age: 42 },
+      { id: 6, lastName: 'Fonseca', firstName: 'Javier', age: 45 },
+      { id: 7, lastName: 'Chacon', firstName: 'Daniela', age: 16 }
     ],
+    checkboxSelection: false,
+    disableColumnFilter: false,
+    disableColumnSorting: false,
+    pageSize: 5,
+    pageSizeOptions: [5, 10, 20],
   },
 };
+
 
 export const WithoutFilter: Story = {
   args: {
@@ -68,10 +78,11 @@ export const Empty: Story = {
       { field: 'lastName', headerName: 'Last name', width: 150 },
       { field: 'age', headerName: 'Age', type: 'number', width: 110 },
     ] as GridColDef[],
+    rows: [],
     disableColumnFilter: false,
     disableColumnSorting: false,
-    filterModel: { items: [] },
-    rows: [],
-    sortModel: [],
+    checkboxSelection: false,
+    pageSize: 5,
+    pageSizeOptions: [5, 10, 20],
   },
 };

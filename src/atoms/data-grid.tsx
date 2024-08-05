@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+
 import { DataGrid as MuiDataGrid, DataGridProps as MuiDataGridProps, GridColDef, GridFilterModel, GridSortModel, GridPaginationModel} from '@mui/x-data-grid';
 
 interface DataGridProps extends Omit<MuiDataGridProps, 'columns' | 'rows'> {
@@ -12,7 +13,7 @@ interface DataGridProps extends Omit<MuiDataGridProps, 'columns' | 'rows'> {
     pageSizeOptions?: number[];
 }
 
-function DataGrid({ columns, rows, disableColumnFilter, disableColumnSorting, filterModel, pageSize = 5, pageSizeOptions = [], checkboxSelection = false, ...props}: DataGridProps) {
+function DataGrid({checkboxSelection = false, columns, disableColumnFilter, disableColumnSorting, filterModel, rows, pageSize = 5, pageSizeOptions = [],  ...props}: DataGridProps) {
     const [sortModel, setSortModel] = useState<GridSortModel>([]);
     const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
         pageSize: pageSize,
@@ -27,20 +28,20 @@ function DataGrid({ columns, rows, disableColumnFilter, disableColumnSorting, fi
         setPaginationModel(model);
     };
 
-    return (
+    return(
         <div style={{ width: '100%' }}>
             <MuiDataGrid 
-                rows={rows} 
                 columns={columns} 
+                checkboxSelection={checkboxSelection}
                 disableColumnFilter={disableColumnFilter}
                 disableColumnSorting={disableColumnSorting}
                 filterModel={filterModel}
-                paginationModel={paginationModel}
+                rows={rows} 
                 onPaginationModelChange={handlePaginationModelChange}
-                pageSizeOptions={pageSizeOptions}
-                checkboxSelection={checkboxSelection}
-                sortModel={sortModel}
                 onSortModelChange={handleSortModelChange}
+                paginationModel={paginationModel}
+                pageSizeOptions={pageSizeOptions}
+                sortModel={sortModel}
                 {...props}
             />
         </div>
