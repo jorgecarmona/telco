@@ -8,12 +8,12 @@ interface DataGridProps extends Omit<MuiDataGridProps, 'columns' | 'rows'> {
     disableColumnFilter: boolean;
     disableColumnSorting: boolean;
     filterModel?: GridFilterModel;
-    rows: Record<string, unknown>[];
     pageSize: number;
     pageSizeOptions?: number[];
+    rows: Record<string, unknown>[];
 }
 
-function DataGrid({checkboxSelection = false, columns, disableColumnFilter, disableColumnSorting, filterModel, rows, pageSize = 5, pageSizeOptions = [],  ...props}: DataGridProps) {
+function DataGrid({checkboxSelection = false, columns, disableColumnFilter, disableColumnSorting, filterModel, pageSize = 5, pageSizeOptions = [], rows, ...props}: DataGridProps) {
     const [sortModel, setSortModel] = useState<GridSortModel>([]);
     const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
         pageSize: pageSize,
@@ -36,11 +36,11 @@ function DataGrid({checkboxSelection = false, columns, disableColumnFilter, disa
                 disableColumnFilter={disableColumnFilter}
                 disableColumnSorting={disableColumnSorting}
                 filterModel={filterModel}
-                rows={rows} 
                 onPaginationModelChange={handlePaginationModelChange}
                 onSortModelChange={handleSortModelChange}
                 paginationModel={paginationModel}
                 pageSizeOptions={pageSizeOptions}
+                rows={rows} 
                 sortModel={sortModel}
                 {...props}
             />

@@ -20,9 +20,9 @@ const meta = {
     sortModel: { table: { disable: true } },
   },
   args: {
+    checkboxSelection: false,
     pageSize: 5,
     pageSizeOptions: [5, 10, 20],
-    checkboxSelection: false
   },
 } satisfies Meta<typeof DataGrid>;
 
@@ -79,9 +79,9 @@ export const Empty: Story = {
       { field: 'age', headerName: 'Age', type: 'number', width: 110 },
     ] as GridColDef[],
     rows: [],
+    checkboxSelection: false,
     disableColumnFilter: false,
     disableColumnSorting: false,
-    checkboxSelection: false,
     pageSize: 5,
     pageSizeOptions: [5, 10, 20],
   },

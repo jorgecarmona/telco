@@ -28,8 +28,8 @@ describe('DataGrid', () => {
         disableColumnFilter={false}
         disableColumnSorting={false}
         filterModel={{ items: [] }}
-        rows={rows}
         pageSize={5}
+        rows={rows}
       />,
     );
 
@@ -54,8 +54,8 @@ describe('DataGrid', () => {
         disableColumnFilter={false}
         disableColumnSorting={false}
         filterModel={{ items: [] }}
-        rows={rows}
         pageSize={5}
+        rows={rows}
       />,
     );
 
