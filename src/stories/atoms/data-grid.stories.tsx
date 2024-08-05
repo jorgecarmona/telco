@@ -4,7 +4,7 @@ import { GridColDef } from '@mui/x-data-grid';
 
 import DataGrid from '../../atoms/data-grid';
 
-const meta: Meta<typeof DataGrid> = {
+const meta = {
   title: 'Atoms/DataGrid',
   component: DataGrid,
   parameters: {

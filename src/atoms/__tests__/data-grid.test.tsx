@@ -25,10 +25,10 @@ describe('DataGrid', () => {
     render(
       <DataGrid
         columns={columns}
-        rows={rows}
         disableColumnFilter={false}
         disableColumnSorting={false}
         filterModel={{ items: [] }}
+        rows={rows}
         pageSize={5}
       />,
     );
@@ -51,10 +51,10 @@ describe('DataGrid', () => {
     render(
       <DataGrid
         columns={columns}
-        rows={rows}
         disableColumnFilter={false}
         disableColumnSorting={false}
         filterModel={{ items: [] }}
+        rows={rows}
         pageSize={5}
       />,
     );
