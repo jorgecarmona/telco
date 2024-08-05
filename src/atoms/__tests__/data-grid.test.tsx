@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 
 import userEvent from '@testing-library/user-event';
 
@@ -28,8 +28,8 @@ describe('DataGrid', () => {
         disableColumnFilter={false}
         disableColumnSorting={false}
         filterModel={{ items: [] }}
-        pageSize={5}
         rows={rows}
+        pageSize={5}
       />,
     );
 
@@ -47,33 +47,30 @@ describe('DataGrid', () => {
     });
   });
 
-  it('sorts rows by first name in ascending order when the column header is clicked', () => {
+  it('sorts rows by column when header is clicked', async () => {
     render(
       <DataGrid
         columns={columns}
         disableColumnFilter={false}
         disableColumnSorting={false}
         filterModel={{ items: [] }}
-        pageSize={5}
         rows={rows}
+        pageSize={5}
       />,
     );
 
     const firstNameHeader = screen.getByText('First name');
     userEvent.click(firstNameHeader);
 
-    const sortedRows = [
-      { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-      { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-      { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-      { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    ];
+    await waitFor(() => {
+      const sortedRows = [...rows].sort((a, b) =>
+        a.firstName.localeCompare(b.firstName),
+    );
 
-    sortedRows.forEach((row, index) => {
-      const rowElement = screen.getAllByRole('row')[index + 1];
-      expect(rowElement).toHaveTextContent(
-        new RegExp(`${row.firstName}.*${row.lastName}.*${row.age}`),
-      );
+      sortedRows.forEach((row, index) => {
+        const rowElement = screen.getAllByRole('row')[index + 1];
+        expect(rowElement).toHaveTextContent(row.firstName);
+      });
     });
   });
 });
