@@ -25,10 +25,10 @@ describe('DataGrid', () => {
     render(
       <DataGrid
         columns={columns}
+        rows={rows}
         disableColumnFilter={false}
         disableColumnSorting={false}
         filterModel={{ items: [] }}
-        rows={rows}
         pageSize={5}
       />,
     );
@@ -51,10 +51,10 @@ describe('DataGrid', () => {
     render(
       <DataGrid
         columns={columns}
+        rows={rows}
         disableColumnFilter={false}
         disableColumnSorting={false}
         filterModel={{ items: [] }}
-        rows={rows}
         pageSize={5}
       />,
     );
@@ -65,7 +65,7 @@ describe('DataGrid', () => {
     await waitFor(() => {
       const sortedRows = [...rows].sort((a, b) =>
         a.firstName.localeCompare(b.firstName),
-    );
+      );
 
       sortedRows.forEach((row, index) => {
         const rowElement = screen.getAllByRole('row')[index + 1];
