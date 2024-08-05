@@ -1,8 +1,9 @@
-import {render, screen, cleanup} from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
+
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 
-import Alert from '../../atoms/alert';
+import Alert from '../alert';
 
 afterEach(cleanup);
 
@@ -16,32 +17,23 @@ describe('Alert component', () => {
       'warning',
     ];
     alertTypes.forEach((severity) => {
-      render(<Alert severity={severity}>Test {severity} message</Alert>);
-      expect(
-        screen.getByText(severity.charAt(0).toUpperCase() + severity.slice(1)),
-      ).toBeInTheDocument();
+      render(<Alert open={true} severity={severity}>{`Test ${severity} message`}</Alert>);
+      const expectedTitle = severity.charAt(0).toUpperCase() + severity.slice(1);
+      expect(screen.getByText(expectedTitle)).toBeInTheDocument();
       expect(screen.getByText(`Test ${severity} message`)).toBeInTheDocument();
       cleanup();
     });
   });
 
-  it('closes the alert when the close button is clicked', async () => {
-    render(<Alert severity="error">Test error message</Alert>);
-    
-    expect(screen.getByText('Error')).toBeInTheDocument();
-    expect(screen.getByText('Test error message')).toBeInTheDocument();
-    
-    const closeButton = screen.getByRole('button');
-    await userEvent.click(closeButton);
-    
-    expect(screen.queryByText('Error')).not.toBeInTheDocument();
-    expect(screen.queryByText('Test error message')).not.toBeInTheDocument();
+  it('does not render anything when open state is false', () => {
+    render(<Alert open={false} severity="error">Test error message</Alert>);
+    expect(screen.queryByTestId('mui-alert')).not.toBeInTheDocument();
   });
 
   it('calls the onClose callback when the alert is closed', () => {
     const onCloseMock = jest.fn();
     render(
-      <Alert severity="info" onClose={onCloseMock}>
+      <Alert open={true} severity="info" onClose={onCloseMock}>
         Test info message
       </Alert>,
     );
@@ -50,20 +42,26 @@ describe('Alert component', () => {
     expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
 
-  it('does not render anything when open state is false', async () => {
-    const { rerender } = render(
-      <Alert severity="success">Test success message</Alert>,
+  it('calls the onClose callback when the alert is closed', () => {
+    const onCloseMock = jest.fn();
+    render(
+      <Alert open={true} severity="info" onClose={onCloseMock}>
+        Test info message
+      </Alert>,
     );
-    
-    expect(screen.getByText('Success')).toBeInTheDocument();
-    expect(screen.getByText('Test success message')).toBeInTheDocument();
-    
     const closeButton = screen.getByRole('button');
-    await userEvent.click(closeButton);
-    
-    rerender(<Alert severity="success">Test success message</Alert>);
-    
+    userEvent.click(closeButton);
+    expect(onCloseMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('returns empty string for an unexpected severity', () => {
+    render(<Alert open={true} severity={'invalidSeverity' as any}>Test invalid severity message</Alert>);
+
+    expect(screen.queryByText('Error')).not.toBeInTheDocument();
+    expect(screen.queryByText('Info')).not.toBeInTheDocument();
     expect(screen.queryByText('Success')).not.toBeInTheDocument();
-    expect(screen.queryByText('Test success message')).not.toBeInTheDocument();
+    expect(screen.queryByText('Warning')).not.toBeInTheDocument();
+
+    expect(screen.getByText('Test invalid severity message')).toBeInTheDocument();
   });
 });
