@@ -1,14 +1,11 @@
 import { render, screen, cleanup } from '@testing-library/react';
-
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom/extend-expect';
 
 import Alert from '../alert';
 
 afterEach(cleanup);
 
 describe('Alert component', () => {
-
   it('renders the correct title and message for each alert type', () => {
     const alertTypes: Array<'error' | 'info' | 'success' | 'warning'> = [
       'error',
@@ -61,7 +58,6 @@ describe('Alert component', () => {
     expect(screen.queryByText('Info')).not.toBeInTheDocument();
     expect(screen.queryByText('Success')).not.toBeInTheDocument();
     expect(screen.queryByText('Warning')).not.toBeInTheDocument();
-
     expect(screen.getByText('Test invalid severity message')).toBeInTheDocument();
   });
 });

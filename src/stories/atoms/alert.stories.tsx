@@ -3,7 +3,6 @@ import type {Meta, StoryObj} from '@storybook/react';
 import Alert from '../../atoms/alert';
 import {action} from '@storybook/addon-actions';
 
-
 const meta = {
     title: 'Atoms/Alert',
     component: Alert,

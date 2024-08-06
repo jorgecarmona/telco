@@ -11,7 +11,6 @@ interface AlertProps extends MuiAlertProps {
 }
 
 function Alert({ children, onClose, open, severity, title,   ...rest }: AlertProps) {
-
   const handleClose = () => {
     if (onClose) {
       onClose();
@@ -27,7 +26,6 @@ function Alert({ children, onClose, open, severity, title,   ...rest }: AlertPro
       'success': 'Success',
       'warning': 'Warning',
     };
-  
     return titles[severity] || '';
   };
 
