@@ -1,64 +1,70 @@
-import {Meta, StoryObj} from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
+import {action} from '@storybook/addon-actions';
 
 import Alert from '../../atoms/alert';
-import {action} from '@storybook/addon-actions';
-import { title } from 'process';
 
-type AlertProps = {
-  severity: 'error' | 'info' | 'success' | 'warning';
-  children: React.ReactNode;
-  title: ''
-};
-
-const meta: Meta<AlertProps> = {
-  title: 'Atoms/Alert',
-  component: Alert,
-  tags: ['autodocs'],
-  parameters: {
-    layout: 'centered',
-  },
-  argTypes: {
-    severity: {
-      control: 'select',
-      options: ['error', 'info', 'success', 'warning'],
+const meta = {
+    title: 'Atoms/Alert',
+    component: Alert,
+    tags: ['autodocs'],
+    parameters: {
+      layout: 'centered',
     },
-  },
-};
+    argTypes: {
+      severity: {
+        control: 'select',
+        options: ['error', 'info', 'success', 'warning'],
+      },
+      open: {
+        control: 'boolean',
+        defaultValue: true,
+      },
+      title: {
+        control: 'text',
+      },
+    },
+}satisfies Meta<typeof Alert>;
 
 export default meta;
 
-export const Error = {
+type Story = StoryObj<typeof meta>;
+
+export const Error: Story = {
   args: {
-    severity: 'error',
     children: 'This is an error alert',
     onClose: action('onClose was called'),
+    open: true,
+    severity: 'error',
     title: '',
   },
 };
 
-export const Info = {
+export const Info: Story = {
   args: {
-    severity: 'info',
     children: 'This is an info alert',
     onClose: action('onClose was called'),
-    title: '',
+    open: true,
+    severity: 'info',
+    title: '',    
   },
 };
 
-export const Success = {
+export const Success: Story = {
   args: {
+    children: 'This is a success alert',
+    onClose: action('onClose was called'),
+    open: true,
     severity: 'success',
-    children: 'This is an success alert',
-    onClose: action('onClose was called'),
-    title: '',
+    title: '',    
   },
 };
 
-export const Warning = {
+export const Warning: Story = {
   args: {
-    severity: 'warning',
-    children: 'This is an warning alert',
+    children: 'This is a warning alert',
     onClose: action('onClose was called'),
-    title: '',
+    open: true,
+    severity: 'warning',
+    title: '',    
   },
 };
